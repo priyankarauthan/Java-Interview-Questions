@@ -27,13 +27,13 @@ class MyClass implements A, B {
         MyClass obj = new MyClass();
         obj.show();  // Compilation Error if not overridden
     }
-}
+}```
 Compilation Error:
 Duplicate default methods named show with the parameters () are inherited from the types A and B.
 
 How to Resolve This Conflict? To resolve the ambiguity, we must override the conflicting method in MyClass and explicitly specify which interface's method to call using InterfaceName.super.methodName().
 
-class MyClass implements A, B {
+```class MyClass implements A, B {
     @Override
     public void show() {
         // Explicitly calling interface method
@@ -46,6 +46,7 @@ class MyClass implements A, B {
         obj.show();  // Prints: A's show method
     }
 }
+```
 ## @Transactional Annotation in Spring Boot
 
 The @Transactional annotation in Spring Boot is used to manage database transactions. It ensures that a series of database operations are executed as a single unit of work—either all succeed or all fail (rollback in case of an error).
