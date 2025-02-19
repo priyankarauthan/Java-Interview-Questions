@@ -46,3 +46,12 @@ class MyClass implements A, B {
         obj.show();  // Prints: A's show method
     }
 }
+## @Transactional Annotation in Spring Boot
+
+The @Transactional annotation in Spring Boot is used to manage database transactions. It ensures that a series of database operations are executed as a single unit of work—either all succeed or all fail (rollback in case of an error).
+
+```java
+@Transactional(propagation = Propagation.REQUIRES_NEW)
+public void someMethod() {
+    // Your code here
+}
