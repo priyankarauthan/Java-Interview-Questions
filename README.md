@@ -3,7 +3,13 @@
 ## When a class implements two interfaces that have the same default method, Java does not know which method to use, and it results in a compilation error unless the class provides its own implementation.
 
 
-Java
+# Java-Interview-Questions
+
+## When a class implements two interfaces that have the same default method, Java does not know which method to use, and it results in a compilation error unless the class provides its own implementation.
+
+Example Scenario
+
+```java
 interface A {
     default void show() {
         System.out.println("A's show method");
@@ -27,7 +33,6 @@ Duplicate default methods named show with the parameters () are inherited from t
 
 How to Resolve This Conflict? To resolve the ambiguity, we must override the conflicting method in MyClass and explicitly specify which interface's method to call using InterfaceName.super.methodName().
 
-Java
 class MyClass implements A, B {
     @Override
     public void show() {
