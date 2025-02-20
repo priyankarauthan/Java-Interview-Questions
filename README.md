@@ -56,3 +56,18 @@ The @Transactional annotation in Spring Boot is used to manage database transact
 public void someMethod() {
     // Your code here
 }
+```
+
+## Garbage Collection (GC) in Java
+Garbage Collection (GC) in Java is an automatic memory management process that removes unused objects from heap memory to free up space and avoid memory leaks. It is handled by the JVM (Java Virtual Machine) and does not require explicit deallocation of objects.
+
+## How Does Garbage Collection Work?
+Objects are allocated in heap memory when created using new.
+Garbage Collector identifies unreachable objects (objects with no active references).
+GC removes those objects and reclaims memory.
+Memory is compacted and optimized to reduce fragmentation.
+When Does Garbage Collection Happen?
+The JVM runs GC automatically when it detects low memory.
+You can suggest GC using System.gc(), but it is not guaranteed to run immediately.
+GC primarily occurs during idle CPU time to minimize performance impact.
+
