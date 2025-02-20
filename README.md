@@ -110,3 +110,9 @@ Static Feature	Description	Example Usage
 4) Static Nested Class	- Does not require an outer class instance	static class Inner {}
 5) Static Import - Allows direct use of static members	import static java.lang.Math.*;
 
+## When to Use What?
+Use @PathVariable when the value is a key part of the resource path (e.g., /orders/{orderId}).
+Use @RequestParam for optional query parameters that refine the request (e.g., /orders?status=shipped).
+
+
+
