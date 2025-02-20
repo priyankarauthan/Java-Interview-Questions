@@ -71,3 +71,35 @@ The JVM runs GC automatically when it detects low memory.
 You can suggest GC using System.gc(), but it is not guaranteed to run immediately.
 GC primarily occurs during idle CPU time to minimize performance impact.
 
+## How to Make a Class Immutable in Java?
+An immutable class is a class whose objects cannot be modified after creation. All fields of an immutable object remain constant throughout its lifecycle.
+
+Steps to Create an Immutable Class in Java
+To make a class immutable, follow these best practices:
+
+1. Declare the class as final
+This prevents subclassing, which could allow modification of fields.
+
+final class ImmutableClass {
+2. Make all fields private and final
+Fields should be private to prevent direct access and final to ensure they are assigned only once.
+
+private final int id;
+private final String name;
+3. Initialize fields via a constructor
+Provide a constructor to initialize all fields.
+
+public ImmutableClass(int id, String name) {
+    this.id = id;
+    this.name = name;
+}
+4. Do not provide setter methods
+Setters allow modification, so they should not be present.
+
+5. Return deep copies of mutable fields in getters
+If a field is a mutable object (like a List or Date), return a defensive copy to prevent modification.
+
+public Date getDate() {
+    return new Date(date.getTime());  // Defensive copy
+}
+
