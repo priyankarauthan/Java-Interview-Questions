@@ -102,4 +102,11 @@ If a field is a mutable object (like a List or Date), return a defensive copy to
 public Date getDate() {
     return new Date(date.getTime());  // Defensive copy
 }
+## 🔹 Summary Table
+Static Feature	Description	Example Usage
+1) Static Variable -	Shared by all instances of a class	static int count;
+2) Static Method - Belongs to the class, not an instance	static void show();
+3) Static Block	- Executes once when the class loads	static { init(); }
+4) Static Nested Class	- Does not require an outer class instance	static class Inner {}
+5) Static Import - Allows direct use of static members	import static java.lang.Math.*;
 
