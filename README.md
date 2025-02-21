@@ -1,4 +1,4 @@
-# Java-Interview-Questions
+## Java-Interview-Questions
 
 # When a class implements two interfaces that have the same default method, Java does not know which method to use, and it results in a compilation error unless the class provides its own implementation.
 
