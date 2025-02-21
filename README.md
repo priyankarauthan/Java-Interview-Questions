@@ -319,15 +319,21 @@ class SharedResource {
 }
 ```
 ### ✅ Use sleep() When:
+
+
 ## 1️⃣ Pausing Execution for a Fixed Time
 If a thread needs to be paused for a specific duration without depending on other threads.
 Example: A scheduled task that runs every few seconds.
+
 ## 2️⃣ CPU Load Reduction
 If a thread should pause periodically to avoid high CPU usage.
 Example: A polling mechanism that checks for changes every few seconds.
+
 ## 3️⃣ Retry Logic Implementation
 If a thread needs to retry an operation after a fixed delay.
+
 Example: Retrying a failed API request after a short pause.
+
 🔹 Example Usage:
 ```
 class SleepExample {
