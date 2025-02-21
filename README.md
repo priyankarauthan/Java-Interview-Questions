@@ -268,22 +268,81 @@ Thread sleeping...
 (Thread pauses for ~2 seconds)
 Thread woke up...
 ```
-# Key Differences
-Feature	wait()	sleep()
+## Difference Between wait() and sleep()
 
-Defined In	Object	Thread
+| Feature               | wait()                                  | sleep()                                 |
+|----------------------|--------------------------------------|--------------------------------------|
+| **Defined In**       | `java.lang.Object`                   | `java.lang.Thread`                   |
+| **Requires Synchronization?** | Yes (`synchronized` block/method) | No |
+| **Releases Lock?**   | Yes                                   | No |
+| **Wake-Up Condition** | `notify()` / `notifyAll()` or interrupted | After the specified time or interrupted |
+| **Thread State**     | `WAITING` or `TIMED_WAITING`         | `TIMED_WAITING`                      |
+| **Can Be Called On?** | Any object                           | Only threads (`Thread.sleep()`)      |
 
-Requires Synchronization?	Yes (synchronized block/method)	No
 
-Releases Lock?	Yes	No
 
-Wake-Up Condition	notify() / notifyAll() or interrupted	After the time expires or interrupted
 
-Thread State	WAITING or TIMED_WAITING	TIMED_WAITING
+# When to Use `wait()` and `sleep()` in Java
 
-# When to Use?
-Use wait() when threads need to communicate and coordinate their execution.
+Both `wait()` and `sleep()` are used to pause a thread, but their use cases are different. Here's when to use each:
 
-Use sleep() when you simply need to pause execution for a fixed time.
+## ✅ Use `wait()` When:
+
+## 1️⃣ Thread Communication is Required  
+- If multiple threads are working together and need to wait for some condition to be met before proceeding.  
+- **Example**: A producer-consumer problem where the consumer waits until the producer adds items to a queue.
+
+## 2️⃣ Releasing Locks is Necessary  
+- If a thread should pause execution but allow other threads to acquire the lock and proceed.  
+- **Example**: A thread waiting for a resource to become available.
+
+## 3️⃣ Event-Driven Synchronization is Needed  
+- If a thread should only resume when another thread calls `notify()` or `notifyAll()`.  
+- **Example**: A thread waiting for user input before proceeding.
+
+## 🔹 Example Usage:
+```java
+class SharedResource {
+    private boolean available = false;
+
+    public synchronized void waitForResource() throws InterruptedException {
+        while (!available) {
+            wait(); // Releases the lock and waits
+        }
+        System.out.println("Resource acquired!");
+    }
+
+    public synchronized void releaseResource() {
+        available = true;
+        notify(); // Notifies waiting threads
+    }
+}
+```
+### ✅ Use sleep() When:
+## 1️⃣ Pausing Execution for a Fixed Time
+If a thread needs to be paused for a specific duration without depending on other threads.
+Example: A scheduled task that runs every few seconds.
+## 2️⃣ CPU Load Reduction
+If a thread should pause periodically to avoid high CPU usage.
+Example: A polling mechanism that checks for changes every few seconds.
+## 3️⃣ Retry Logic Implementation
+If a thread needs to retry an operation after a fixed delay.
+Example: Retrying a failed API request after a short pause.
+🔹 Example Usage:
+```
+class SleepExample {
+    public static void main(String[] args) {
+        System.out.println("Task started...");
+        try {
+            Thread.sleep(2000); // Pauses for 2 seconds
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Task resumed after sleep...");
+    }
+}
+```
+
+
 
 
