@@ -349,6 +349,196 @@ class SleepExample {
 }
 ```
 
+### We can create a thread using two primary approaches:-
+
+# Extending the Thread class
+# Implementing the Runnable interface
+Additionally, Java 8 introduced lambda expressions and Java 5 introduced the Executor framework, which are also commonly used to create and manage threads.
+
+# 1️⃣ Creating a Thread by Extending Thread Class
+
+The Thread class provides a run() method that we can override.
+We create an instance of the subclass and call start() to begin execution.
+🔹 Example:
+```
+class MyThread extends Thread {
+    @Override
+    public void run() {
+        System.out.println("Thread is running...");
+    }
+}
+
+public class ThreadExample {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        t1.start(); // Starts the thread execution
+    }
+}
+```
+🔹 Output:
+
+arduino
+Copy
+Edit
+Thread is running...
+✅ Use Case: When we need to override Thread methods or maintain object-oriented behavior.
+
+# 2️⃣ Creating a Thread by Implementing Runnable Interface
+
+Runnable is a functional interface with a single method run().
+The Thread class takes a Runnable object in its constructor.
+🔹 Example:
+```
+class MyRunnable implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("Thread is running...");
+    }
+}
+
+public class RunnableExample {
+    public static void main(String[] args) {
+        Thread t1 = new Thread(new MyRunnable());
+        t1.start();
+    }
+}
+```
+🔹 Output:
+
+arduino
+Copy
+Edit
+Thread is running...
+✅ Use Case: When we need to implement multiple interfaces (since Java does not support multiple inheritance).
+
+# 3️⃣ Using Java 8 Lambda Expressions
+
+Since Runnable is a functional interface, we can use a lambda expression.
+🔹 Example:
+```
+public class LambdaThreadExample {
+    public static void main(String[] args) {
+        Thread t1 = new Thread(() -> System.out.println("Thread is running using Lambda..."));
+        t1.start();
+    }
+}
+```
+🔹 Output:
+
+arduino
+
+Thread is running using Lambda...
+✅ Use Case: When we want cleaner and more concise code.
+
+# 4️⃣ Using ExecutorService (Thread Pool - Recommended for Large Scale Apps)
+Instead of manually managing threads, Java provides the ExecutorService framework.
+It allows efficient thread pooling and resource management.
+🔹 Example:
+```
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ExecutorExample {
+    public static void main(String[] args) {
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+        executor.submit(() -> System.out.println("Thread executed using ExecutorService"));
+        executor.shutdown(); // Always shut down the executor after use
+    }
+}
+```
+🔹 Output:
+
+Thread executed using ExecutorService
+✅ Use Case: When we need better thread management and scalability.
+
+# 🔥 Summary Table
+Approach	Pros	Cons
+Extending Thread	Simple to use	Can't extend another class
+Implementing Runnable	Supports multiple inheritance	Requires Thread class to run
+Lambda Expression	More concise, readable	Only works for Runnable
+Executor Framework	Best for large-scale applications	Slightly complex to implement
+## 🚀 Which One Should You Use?
+✅ Use Runnable or Lambda when you don’t need to extend Thread.
+✅ Use ExecutorService for multi-threading in real-world applications.
+❌ Avoid directly extending Thread, unless necessary.
+
+
+
+
+
+
+
+You said:
+when should we implement Runnable and when should we extend Thread class
+ChatGPT said:
+✅ When to Implement Runnable vs. Extend Thread in Java?
+In Java, you can create a thread by implementing Runnable or extending Thread, but the best choice depends on the use case.
+
+🔹 Implement Runnable When:
+✅ You need to follow best practices – Implementing Runnable is the preferred approach.
+✅ You need multiple inheritance – Since Java doesn’t support multiple inheritance, you can extend another class while implementing Runnable.
+✅ You want to separate logic from threading behavior – The Runnable object can be passed to different Thread instances.
+✅ You want better thread management – Works well with thread pools (ExecutorService).
+
+🔹 Example:
+java
+Copy
+Edit
+class MyTask implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("Runnable thread is running...");
+    }
+}
+
+public class RunnableExample {
+    public static void main(String[] args) {
+        Thread t1 = new Thread(new MyTask()); // Pass Runnable to Thread
+        t1.start();
+    }
+}
+📝 Use Case:
+
+When your class already extends another class, since Java doesn’t support multiple inheritance.
+When working with ExecutorService for better thread management.
+🔹 Extend Thread When:
+✅ You need to override Thread class methods – If you need to modify methods like start(), run(), or interrupt().
+✅ Your thread has unique behavior – If the thread logic is tightly coupled with the thread itself.
+✅ You don’t need multiple inheritance – Since extending Thread means you can't extend another class.
+
+🔹 Example:
+java
+Copy
+Edit
+class MyThread extends Thread {
+    @Override
+    public void run() {
+        System.out.println("Thread class is running...");
+    }
+}
+
+public class ThreadExample {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        t1.start();
+    }
+}
+📝 Use Case:
+
+When you need full control over the thread behavior.
+When extending Thread makes the code more readable (not recommended for large applications).
+🔥 Key Differences:
+Feature	Implementing Runnable	Extending Thread
+Inheritance	Allows extending another class	Cannot extend another class
+Code Reusability	Better, as Runnable can be reused	Less reusable, as logic is in Thread
+Flexibility	Can be used with ExecutorService	Cannot be used with ExecutorService
+Coupling	Loosely coupled with Thread	Tightly coupled with Thread
+🚀 Final Recommendation:
+Use Runnable in most cases – It promotes code reusability and allows multiple inheritance.
+Extend Thread only when you need to modify thread behavior (e.g., overriding start() or interrupt()).
+For large-scale applications, always use Runnable with ExecutorService.
+
 
 
 
