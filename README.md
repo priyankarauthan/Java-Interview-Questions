@@ -349,10 +349,11 @@ class SleepExample {
 }
 ```
 
+
 ### We can create a thread using two primary approaches:-
 
-# Extending the Thread class
-# Implementing the Runnable interface
+Extending the Thread class
+Implementing the Runnable interface
 Additionally, Java 8 introduced lambda expressions and Java 5 introduced the Executor framework, which are also commonly used to create and manage threads.
 
 # 1️⃣ Creating a Thread by Extending Thread Class
