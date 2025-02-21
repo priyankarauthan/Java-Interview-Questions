@@ -272,13 +272,20 @@ Thread woke up...
 ```
 # Key Differences
 Feature	wait()	sleep()
+
 Defined In	Object	Thread
+
 Requires Synchronization?	Yes (synchronized block/method)	No
+
 Releases Lock?	Yes	No
+
 Wake-Up Condition	notify() / notifyAll() or interrupted	After the time expires or interrupted
+
 Thread State	WAITING or TIMED_WAITING	TIMED_WAITING
+
 # When to Use?
 Use wait() when threads need to communicate and coordinate their execution.
+
 Use sleep() when you simply need to pause execution for a fixed time.
 
 
