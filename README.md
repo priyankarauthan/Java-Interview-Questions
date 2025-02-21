@@ -114,5 +114,77 @@ Static Feature	Description	Example Usage
 Use @PathVariable when the value is a key part of the resource path (e.g., /orders/{orderId}).
 Use @RequestParam for optional query parameters that refine the request (e.g., /orders?status=shipped).
 
+## Ways to Represent a "Has-a" Relationship in Java:
+In object-oriented design, a "has-a" relationship represents composition or aggregation, meaning one class contains an instance (or multiple instances) of another class. This is also known as object association.
+
+# Composition (Strong Association)
+
+If the contained object cannot exist without the container.
+Implemented using instance variables.
+Example:
+```
+class Engine {
+    void start() {
+        System.out.println("Engine started");
+    }
+}
+
+class Car {
+    private Engine engine;  // Strong association (Composition)
+    
+    public Car() {
+        this.engine = new Engine(); // Created inside Car (Car owns Engine)
+    }
+
+    void startCar() {
+        engine.start();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.startCar();  // Engine started
+    }
+}
+```
+Here, Car has-a Engine. If Car is destroyed, its Engine is also destroyed.
+# Aggregation (Weak Association)
+
+If the contained object can exist independently.
+The parent class holds a reference to the child class instead of owning it.
+Example:
+```
+class Engine {
+    void start() {
+        System.out.println("Engine started");
+    }
+}
+
+class Car {
+    private Engine engine;  // Weak association (Aggregation)
+    
+    public Car(Engine engine) {  // Injected from outside
+        this.engine = engine;
+    }
+
+    void startCar() {
+        engine.start();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Engine engine = new Engine();  // Created independently
+        Car car = new Car(engine);    // Passed as a dependency
+        car.startCar();  // Engine started
+    }
+}
+```
+Here, Engine exists independently, and Car just has a reference to it.
+# Summary:
+Type	Relationship	Object Lifespan
+Composition	Strong association	Contained object depends on container
+Aggregation	Weak association	Contained object exists independently
 
 
