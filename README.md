@@ -237,10 +237,15 @@ Thread 1 resumed...
 ```
 # 2. sleep() Method
 a) Defined In: java.lang.Thread
+
 b) Purpose: Pauses the execution of the current thread for a specified period.
+
 c) Synchronization: Does not require a synchronized block.
+
 d) Releases Lock: No, it holds the lock if inside a synchronized block.
+
 e) Wakes Up: Automatically after the specified time or if interrupted.
+
 Example:
 ```
 class SleepExample {
