@@ -187,11 +187,11 @@ Aggregation	Weak association	Contained object exists independently
 ## The wait() and sleep() methods in Java are used to pause the execution of a thread, but they have different use cases and behaviours.
 
 # 1. wait() Method
-Defined In: java.lang.Object
-Purpose: Causes the current thread to wait until another thread calls notify() or notifyAll() on the same object.
-Synchronization: Must be called within a synchronized block or method; otherwise, it throws IllegalMonitorStateException.
-Releases Lock: Yes, it releases the object's monitor lock while waiting.
-Wakes Up: When notify() or notifyAll() is called or when interrupted.
+a) Defined In: java.lang.Object
+b) Purpose: Causes the current thread to wait until another thread calls notify() or notifyAll() on the same object.
+c) Synchronization: Must be called within a synchronized block or method; otherwise, it throws IllegalMonitorStateException.
+d) Releases Lock: Yes, it releases the object's monitor lock while waiting.
+e) Wakes Up: When notify() or notifyAll() is called or when interrupted.
 Example:
 ```
 class WaitExample {
@@ -229,11 +229,11 @@ Thread 2 notifying...
 Thread 1 resumed...
 ```
 # 2. sleep() Method
-Defined In: java.lang.Thread
-Purpose: Pauses the execution of the current thread for a specified period.
-Synchronization: Does not require a synchronized block.
-Releases Lock: No, it holds the lock if inside a synchronized block.
-Wakes Up: Automatically after the specified time or if interrupted.
+a) Defined In: java.lang.Thread
+b) Purpose: Pauses the execution of the current thread for a specified period.
+c) Synchronization: Does not require a synchronized block.
+d) Releases Lock: No, it holds the lock if inside a synchronized block.
+e) Wakes Up: Automatically after the specified time or if interrupted.
 Example:
 ```
 class SleepExample {
