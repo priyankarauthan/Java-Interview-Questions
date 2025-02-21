@@ -511,7 +511,7 @@ When working with ExecutorService for better thread management.
 ✅ You don’t need multiple inheritance – Since extending Thread means you can't extend another class.
 
 🔹 Example:
-
+```
 
 class MyThread extends Thread {
     @Override
@@ -526,11 +526,12 @@ public class ThreadExample {
         t1.start();
     }
 }
+```
 📝 Use Case:
 
 When you need full control over the thread behavior.
 When extending Thread makes the code more readable (not recommended for large applications).
-🔥 Key Differences:
+# 🔥 Key Differences:=
 Feature	Implementing Runnable	Extending Thread
 Inheritance	Allows extending another class	Cannot extend another class
 Code Reusability	Better, as Runnable can be reused	Less reusable, as logic is in Thread
@@ -543,6 +544,58 @@ Use Runnable in most cases – It promotes code reusability and allows multiple 
 Extend Thread only when you need to modify thread behavior (e.g., overriding start() or interrupt()).
 
 For large-scale applications, always use Runnable with ExecutorService.
+
+# ✅ When to Use ConcurrentHashMap vs. HashMap in Java?
+
+Both ConcurrentHashMap and HashMap store key-value pairs, but their use cases differ based on thread safety and performance requirements.
+
+🔹 Use HashMap When:
+
+✅ Single-threaded environments – If your application doesn’t have multiple threads modifying the map concurrently.
+
+✅ Performance is a priority – HashMap is faster than ConcurrentHashMap because it has no synchronization overhead.
+
+✅ You don’t need thread safety – If your map is accessed by only one thread at a time.
+
+🔹 Example:
+```
+import java.util.HashMap;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        HashMap<Integer, String> map = new HashMap<>();
+        map.put(1, "Apple");
+        map.put(2, "Banana");
+        System.out.println(map.get(1)); // Output: Apple
+    }
+}
+```
+
+🚫 Avoid using HashMap in multi-threaded environments – If multiple threads modify it, it may cause data inconsistency or even a race condition.
+
+🔹 Use ConcurrentHashMap When:
+
+✅ Multi-threaded environments – If multiple threads read and write to the map simultaneously.
+
+✅ Thread safety is required – Unlike HashMap, ConcurrentHashMap doesn’t allow structural modifications (e.g., resizing) to cause issues in concurrent environments.
+
+✅ Better performance than Collections.synchronizedMap() – It uses finer-grained locking, allowing better performance in concurrent scenarios.
+
+🔹 Example:
+```
+import java.util.concurrent.ConcurrentHashMap;
+
+public class ConcurrentHashMapExample {
+    public static void main(String[] args) {
+        ConcurrentHashMap<Integer, String> map = new ConcurrentHashMap<>();
+        map.put(1, "Apple");
+        map.put(2, "Banana");
+
+        System.out.println(map.get(1)); // Output: Apple
+    }
+}
+```
+
 
 
 
