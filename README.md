@@ -186,8 +186,6 @@ Aggregation	Weak association	Contained object exists independently
 
 ## The wait() and sleep() methods in Java are used to pause the execution of a thread, but they have different use cases and behaviours.
 
-## The wait() and sleep() methods in Java are used to pause the execution of a thread, but they have different use cases and behaviours.
-
 # 1. wait() Method
 a) Defined In: java.lang.Object
 
