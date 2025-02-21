@@ -502,16 +502,17 @@ public class RunnableExample {
 📝 Use Case:
 
 When your class already extends another class, since Java doesn’t support multiple inheritance.
+
 When working with ExecutorService for better thread management.
+
 🔹 Extend Thread When:
 ✅ You need to override Thread class methods – If you need to modify methods like start(), run(), or interrupt().
 ✅ Your thread has unique behavior – If the thread logic is tightly coupled with the thread itself.
 ✅ You don’t need multiple inheritance – Since extending Thread means you can't extend another class.
 
 🔹 Example:
-java
-Copy
-Edit
+
+
 class MyThread extends Thread {
     @Override
     public void run() {
@@ -535,9 +536,12 @@ Inheritance	Allows extending another class	Cannot extend another class
 Code Reusability	Better, as Runnable can be reused	Less reusable, as logic is in Thread
 Flexibility	Can be used with ExecutorService	Cannot be used with ExecutorService
 Coupling	Loosely coupled with Thread	Tightly coupled with Thread
-🚀 Final Recommendation:
+# 🚀 Final Recommendation:
+
 Use Runnable in most cases – It promotes code reusability and allows multiple inheritance.
+
 Extend Thread only when you need to modify thread behavior (e.g., overriding start() or interrupt()).
+
 For large-scale applications, always use Runnable with ExecutorService.
 
 
