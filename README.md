@@ -701,6 +701,12 @@ Avoid Nested Locks	✅ Reduces risk
 Thread Dump Analysis	✅ Helps detection
 
 
+##  What is the difference between the start() and run() method?
+
+First, both methods are operated in general over the thread. So if we do use threadT1.start() then this method will look for the run() method to create a new thread. 
+While in case of theadT1.run() method will be executed just likely the normal method by the “Main” thread without the creation of any new thread.
+
+
 
 
 
