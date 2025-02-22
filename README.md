@@ -706,6 +706,37 @@ Thread Dump Analysis	✅ Helps detection
 First, both methods are operated in general over the thread. So if we do use threadT1.start() then this method will look for the run() method to create a new thread. 
 While in case of theadT1.run() method will be executed just likely the normal method by the “Main” thread without the creation of any new thread.
 
+### Serialization 
+Serialization is like saving an object as a file or converting it into a format that can be stored or sent over a network.
+
+Imagine you have a Toy (Java Object), and you want to pack it into a box (Convert to a file or stream) so you can store it or send it to someone. Later, you can unpack (Deserialize) it to get back the same toy (Java Object).
+
+## Where is Serialization Used in a Spring Boot Project?
+Serialization is widely used in Spring Boot for various functionalities, such as caching, session management, database operations, and messaging. 
+
+## 🔹 Summary: Where Serialization is Used in Spring Boot
+Caching (Redis, Ehcache)	Objects are stored in cache
+Session Management	Sessions need to be shared across instances
+Message Queues (Kafka, RabbitMQ)	Objects need to be sent as messages
+REST APIs (Jackson, JSON/XML)	Objects are converted to JSON/XML
+Database ORM (JPA/Hibernate)	Objects with non-standard fields need serialization
+File Storage (S3, Local, NFS)	Objects are stored as files
+
+### What is Deserialization?
+
+Deserialization is the reverse of serialization—it converts stored or transmitted data (bytes, JSON, XML, etc.) back into a Java object.
+
+
+## 📌 Where is Deserialization Used in Spring Boot?
+Use Case	How Deserialization Happens?
+REST APIs (JSON/XML to Object)	Jackson converts JSON/XML into Java objects
+Message Queues (Kafka, RabbitMQ)	Messages are deserialized into Java objects
+Caching (Redis, Ehcache)	Cached objects are deserialized before use
+Session Management	Session attributes are deserialized when restored
+Database ORM (JPA/Hibernate)	Objects are deserialized when retrieved from DB
+File Storage (S3, Local, NFS)	Stored objects are deserialized when loaded
+
+
 
 
 
