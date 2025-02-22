@@ -596,6 +596,121 @@ public class ConcurrentHashMapExample {
 }
 ```
 
+#### ✅ What is `Callable` in Java?  
+
+`Callable<T>` is an interface in Java used to represent **tasks that return a result and can throw checked exceptions**. It is similar to `Runnable`, but with **more capabilities**.  
+
+---
+
+## 🔹 Key Differences Between `Callable` and `Runnable`  
+
+| **Feature**               | **Runnable**                          | **Callable<T>**                        |
+|---------------------------|--------------------------------------|----------------------------------------|
+| **Return Type**           | `void` (does not return a value)     | Returns a value (`T`)                 |
+| **Exception Handling**    | Cannot throw checked exceptions      | Can throw checked exceptions          |
+| **Used With**             | `Thread` or `ExecutorService`        | `ExecutorService` with `Future<T>`    |
+| **Blocking Behavior**     | Does not support blocking            | Supports blocking with `Future.get()` |
+
+---
+
+
+## 🔹 Why Use Callable?
+✅ When you need to return a result from a thread.
+✅ When you need to handle checked exceptions in concurrent tasks.
+✅ When working with thread pools (ExecutorService).
+
+###  ✅ Deadlock in Java Multi-Threading
+
+A deadlock occurs in Java when two or more threads are waiting for each other to release locks, but none of them can proceed, causing a permanent block in execution.
+
+### 🔹 How Does Deadlock Happen?
+A deadlock situation can occur when:
+
+Thread-1 holds Lock-A and waits for Lock-B.
+Thread-2 holds Lock-B and waits for Lock-A.
+Neither thread can proceed because both are waiting for each other to release the locks.
+
+### 🛠 How to Prevent Deadlock?
+
+✅ 1. Use Lock Ordering
+Always acquire locks in the same order to avoid circular waiting.
+```
+class SafeResource {
+    void methodA(SafeResource resource) {
+        synchronized (this) { // Always acquire locks in order
+            System.out.println(Thread.currentThread().getName() + " locked " + this);
+            synchronized (resource) {
+                System.out.println(Thread.currentThread().getName() + " locked " + resource);
+            }
+        }
+    }
+}
+```
+✅ 2. Use tryLock() Instead of synchronized (Avoid Waiting Forever)
+Using ReentrantLock.tryLock() prevents deadlock by timing out if a lock isn’t available.
+```
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+class SafeResource {
+    private final Lock lock = new ReentrantLock();
+
+    void methodA(SafeResource resource) {
+        try {
+            if (lock.tryLock()) {
+                try {
+                    System.out.println(Thread.currentThread().getName() + " locked " + this);
+                    if (resource.lock.tryLock()) {
+                        try {
+                            System.out.println(Thread.currentThread().getName() + " locked " + resource);
+                        } finally {
+                            resource.lock.unlock();
+                        }
+                    }
+                } finally {
+                    lock.unlock();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+✅ 3. Avoid Nested Locks
+
+Minimize synchronized blocks and use locks only when needed.
+```
+synchronized (lock1) {
+    // Critical section
+}
+synchronized (lock2) {  // Avoid acquiring nested locks
+    // Critical section
+}
+```
+✅ 4. Use a Deadlock Detection Tool
+Use Java Thread Dump (jstack) or profiling tools like VisualVM to detect deadlocks.
+
+jstack <pid>
+
+🚀 Final Recommendation
+Approach	Effectiveness
+Lock Ordering	✅ Highly effective
+Using tryLock()	✅ Prevents deadlocks
+Avoid Nested Locks	✅ Reduces risk
+Thread Dump Analysis	✅ Helps detection
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
