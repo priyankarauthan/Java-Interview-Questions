@@ -468,24 +468,18 @@ Executor Framework	Best for large-scale applications	Slightly complex to impleme
 
 
 
+###  When to Implement Runnable vs. Extend Thread in Java?
 
-
-You said:
-when should we implement Runnable and when should we extend Thread class
-ChatGPT said:
-✅ When to Implement Runnable vs. Extend Thread in Java?
 In Java, you can create a thread by implementing Runnable or extending Thread, but the best choice depends on the use case.
 
-🔹 Implement Runnable When:
+# 🔹 Implement Runnable When:
 ✅ You need to follow best practices – Implementing Runnable is the preferred approach.
 ✅ You need multiple inheritance – Since Java doesn’t support multiple inheritance, you can extend another class while implementing Runnable.
 ✅ You want to separate logic from threading behavior – The Runnable object can be passed to different Thread instances.
 ✅ You want better thread management – Works well with thread pools (ExecutorService).
 
 🔹 Example:
-java
-Copy
-Edit
+
 class MyTask implements Runnable {
     @Override
     public void run() {
@@ -505,7 +499,8 @@ When your class already extends another class, since Java doesn’t support mult
 
 When working with ExecutorService for better thread management.
 
-🔹 Extend Thread When:
+# 🔹 Extend Thread When:
+
 ✅ You need to override Thread class methods – If you need to modify methods like start(), run(), or interrupt().
 ✅ Your thread has unique behavior – If the thread logic is tightly coupled with the thread itself.
 ✅ You don’t need multiple inheritance – Since extending Thread means you can't extend another class.
@@ -735,6 +730,68 @@ Caching (Redis, Ehcache)	Cached objects are deserialized before use
 Session Management	Session attributes are deserialized when restored
 Database ORM (JPA/Hibernate)	Objects are deserialized when retrieved from DB
 File Storage (S3, Local, NFS)	Stored objects are deserialized when loaded
+
+
+### String Pool in Java
+
+The String Pool in Java is a special memory area inside the heap called the String Constant Pool (SCP) or String Intern Pool. It optimizes memory usage by storing only one copy of each unique string literal, reducing redundancy and improving performance.
+
+# 1. How String Pool Works?
+
+When a string literal (e.g., "Hello") is created, Java first checks the String Pool.
+If the literal already exists in the pool, Java returns a reference to the existing object.
+If it does not exist, Java creates a new string in the pool.
+
+# 2. Example of String Pool Behavior
+
+public class StringPoolExample {
+    public static void main(String[] args) {
+        String s1 = "Hello";
+        String s2 = "Hello";
+
+        System.out.println(s1 == s2);  // true (Same reference from the String Pool)
+    }
+}
+Both s1 and s2 point to the same object in the String Pool.
+
+# 3. String Pool and new Keyword
+When you create a String using new, it creates a new object in the heap, not in the pool.
+
+
+public class StringHeapExample {
+    public static void main(String[] args) {
+        String s1 = "Hello";  
+        String s2 = new String("Hello");
+
+        System.out.println(s1 == s2);  // false (Different memory locations)
+    }
+}
+"Hello" is stored in the String Pool.
+new String("Hello") creates a new object in the heap.
+
+# 4. Using intern() to Add Strings to the Pool
+If you create a string using new, but want to store it in the pool, use .intern():
+
+public class StringInternExample {
+    public static void main(String[] args) {
+        String s1 = new String("Java");
+        String s2 = s1.intern(); // Moves "Java" to the String Pool
+
+        String s3 = "Java";
+
+        System.out.println(s2 == s3);  // true (Both refer to the same pool object)
+    }
+}
+
+# 5. Benefits of the String Pool
+✅ Memory Efficiency – Avoids storing duplicate string objects.
+✅ Performance Optimization – Reusing immutable strings reduces object creation overhead.
+✅ Thread-Safety – Strings are immutable and safely shared across threads.
+
+# 6. When Should You Avoid String Pool?
+If you have many dynamic strings (e.g., reading from files or databases), storing them in the pool can cause memory overhead.
+Use new String(value) to avoid pooling if necessary.
+
 
 
 
