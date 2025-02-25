@@ -792,6 +792,102 @@ public class StringInternExample {
 If you have many dynamic strings (e.g., reading from files or databases), storing them in the pool can cause memory overhead.
 Use new String(value) to avoid pooling if necessary.
 
+### How do you handle deadlocks in Java?
+
+A deadlock occurs in a multithreaded program when two or more threads are waiting for each other's resources, preventing further execution.
+
+
+## Handling Deadlocks in Java
+
+
+1️⃣ Avoid Nested Locks
+
+2️⃣ Use Try-Lock Instead of Synchronized
+
+3️⃣ Implement a Lock Ordering Mechanism
+Always acquire locks in a consistent order to avoid circular waiting.
+
+4️⃣ Set Timeouts for Locks
+Using tryLock(timeout, TimeUnit) in ReentrantLock to avoid indefinite waiting.
+
+5️⃣ Detect and Recover from Deadlocks
+
+
+##  What is a ThreadPool in Java?
+A ThreadPool is a pool of pre-created threads that can be reused to execute multiple tasks instead of creating new threads for each task. It helps manage a large number of threads efficiently.
+
+Java provides the Executor Framework (java.util.concurrent.Executors) to manage thread pools.
+
+
+### 🔹 What is ExecutorService ?
+
+ExecutorService is a special thread manager in Java that helps you run multiple tasks in the background using a pool of threads. Instead of manually creating and managing threads, ExecutorService does it for you efficiently.
+
+Think of it as a task manager:
+
+You submit tasks, and it assigns them to available threads.
+It reuses threads instead of creating new ones for every task.
+It ensures better performance by managing threads automatically.
+
+## 🔹 Why Use ExecutorService?
+
+✅ Easy to use – No need to manually create and start threads.
+✅ Improves performance – Reuses threads instead of constantly creating/destroying them.
+✅ Prevents resource exhaustion – Limits the number of running threads.
+✅ Supports scheduling – Can run tasks periodically.
+
+
+## 🔹 How to Use ExecutorService?
+
+1️⃣ Create a Thread Pool
+```
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ExecutorServiceExample {
+    public static void main(String[] args) {
+        ExecutorService executor = Executors.newFixedThreadPool(3); // 3 threads in the pool
+
+        for (int i = 1; i <= 5; i++) {
+            final int taskNumber = i;
+            executor.execute(() -> {
+                System.out.println("Task " + taskNumber + " executed by " + Thread.currentThread().getName());
+            });
+        }
+
+        executor.shutdown(); // Gracefully shuts down after all tasks are done
+    }
+}
+```
+## 🔹 What happens here?
+
+We create a thread pool with 3 threads.
+
+We submit 5 tasks → They run in the available threads.
+
+The executor.shutdown() ensures tasks complete before shutting down.
+
+
+### 🔹 Different Types of ExecutorService
+1️⃣ Fixed Thread Pool – Limits the number of threads.
+
+ExecutorService executor = Executors.newFixedThreadPool(3);
+
+2️⃣ Cached Thread Pool – Creates new threads as needed but reuses idle threads.
+
+ExecutorService executor = Executors.newCachedThreadPool();
+
+3️⃣ Single Thread Executor – Runs tasks one at a time in a single thread.
+
+ExecutorService executor = Executors.newSingleThreadExecutor();
+
+4️⃣ Scheduled Thread Pool – Runs tasks after a delay or at fixed intervals.
+
+
+ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
+
+
+
 
 
 
