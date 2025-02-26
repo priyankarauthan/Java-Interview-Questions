@@ -1037,6 +1037,31 @@ public class ThreadPoolExample {
 | Consumer Group  | A group of consumers that parallelly consume messages from a topic.                   |
 | Zookeeper       | Manages Kafka metadata, leader election, and configuration.                           |
 
+### 1️⃣ @Mock
+Purpose: Creates a mock instance of a class or interface.
+Usage: Used to mock dependencies of the class being tested.
+Behavior: Does not call real methods but returns stubbed/mock responses.
+Example
+```
+@Mock
+private UserRepository userRepository;
+```
+
+🔹 This tells Mockito to create a fake instance of UserRepository (without hitting the real database).
+
+### 2️⃣ @InjectMocks
+
+Purpose: Injects mocked dependencies into a real instance of a class.
+Usage: Used for the class under test.
+Behavior: Calls real methods of the main class, but mocked dependencies return stubbed values.
+Example
+```
+@InjectMocks
+private UserService userService;
+```
+🔹 This tells Mockito to inject the mocked UserRepository into UserService
+
+
 
 
 
