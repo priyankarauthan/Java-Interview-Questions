@@ -1061,6 +1061,33 @@ private UserService userService;
 ```
 🔹 This tells Mockito to inject the mocked UserRepository into UserService
 
+## Default Behavior of equals() in String Class
+Unlike objects that inherit equals() from Object, 
+the String class overrides equals() to compare character sequences instead of memory references.
+
+## Does equals() Check Value for Strings in Java? 🤔
+✅ Yes!
+For Strings, equals() checks the actual value (content), not the memory reference.
+
+## Does equals() Check Memory Reference in Java? 🤔
+It depends on whether equals() is overridden or not.✅
+Since equals() is not overridden, it behaves like == and checks memory references.
+Default equals() in Object
+```
+public boolean equals(Object obj) {
+    return (this == obj);  // Memory reference check
+}
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
