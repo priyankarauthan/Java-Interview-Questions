@@ -887,6 +887,64 @@ ExecutorService executor = Executors.newSingleThreadExecutor();
 ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
 
 
+## Volatile Keyword
+
+
+The volatile keyword in Java is used for thread safety when accessing shared variables in a multithreaded environment. It ensures that:
+
+Visibility: Changes made by one thread are immediately visible to other threads.
+Prevents Caching: The variable is always read from and written to main memory, not from CPU caches.
+Atomicity for Reads/Writes: Ensures that reads and writes are atomic for variables (but not compound operations like count++).
+
+###  Marker Interface in Java
+A Marker Interface is an interface that does not contain any methods or fields. It is used to signal or "mark" a class, providing metadata that can be used by the Java runtime or frameworks to apply special behavior.
+
+# Examples of Marker Interfaces in Java
+Some built-in marker interfaces in Java include:
+
+Serializable (Java I/O) – Marks objects that can be serialized.
+Cloneable (Java Object Cloning) – Marks objects that can be cloned using clone().
+Remote (Java RMI) – Marks objects that can be used for remote method invocation (RMI).
+
+### ✅ Why Use @FunctionalInterface?
+Ensures the interface has only ONE abstract method
+If a developer accidentally adds a second method, the compiler will throw an error.
+Improves code readability and clarity
+Clearly tells other developers that the interface is intended for functional programming.
+Enables lambda expressions
+Functional interfaces are essential for Java’s functional programming features, especially in Java 8 and later.
+
+### Serializable in Java
+
+The Serializable interface in Java is a marker interface (i.e., it has no methods) that allows an object to be converted into a byte stream so that it can be saved to a file, sent over a network, or stored in a database.
+
+When an object is serialized, its state (i.e., its fields) is converted into a format that can be deserialized (restored) later.
+
+## Why Use Serializable?
+To save an object's state to a file or database.
+To send objects over a network (e.g., in RMI, HTTP requests, or WebSockets).
+To cache objects for faster access in future requests.
+To share objects between different JVMs.
+
+## How to Make a Class Serializable?
+Simply implement java.io.Serializable, since it's a marker interface (no methods to implement).
+
+## serialVersionUID – Why Is It Important?
+serialVersionUID is a unique identifier that ensures version compatibility during deserialization.
+If you modify a class after serialization (e.g., add/remove fields), deserialization will fail unless serialVersionUID remains the same.
+
+
+###  transient Keyword in Java
+The transient keyword in Java is used to prevent a field from being serialized when an object is converted into a byte stream.
+
+When a field is declared transient, it is ignored during serialization, meaning it won't be saved and will have its default value when deserialized.
+
+## Why Use transient?
+Protect sensitive data – e.g., passwords, security keys.
+Avoid unnecessary serialization – e.g., cache data, large objects.
+Prevent serialization errors – e.g., when a field is not Serializable.
+
+
 
 
 
