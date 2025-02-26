@@ -59,19 +59,29 @@ public void someMethod() {
 Garbage Collection (GC) in Java is an automatic memory management process that removes unused objects from heap memory to free up space and avoid memory leaks. It is handled by the JVM (Java Virtual Machine) and does not require explicit deallocation of objects.
 
 ## How Does Garbage Collection Work?
+
 Objects are allocated in heap memory when created using new.
+
 Garbage Collector identifies unreachable objects (objects with no active references).
+
 GC removes those objects and reclaims memory.
+
 Memory is compacted and optimized to reduce fragmentation.
-When Does Garbage Collection Happen?
+
+## When Does Garbage Collection Happen?
+
 The JVM runs GC automatically when it detects low memory.
+
 You can suggest GC using System.gc(), but it is not guaranteed to run immediately.
+
 GC primarily occurs during idle CPU time to minimize performance impact.
 
 ## How to Make a Class Immutable in Java?
+
 An immutable class is a class whose objects cannot be modified after creation. All fields of an immutable object remain constant throughout its lifecycle.
 
 Steps to Create an Immutable Class in Java
+
 To make a class immutable, follow these best practices:
 
 1. Declare the class as final
@@ -91,6 +101,7 @@ public ImmutableClass(int id, String name) {
     this.name = name;
 }
 4. Do not provide setter methods
+
 Setters allow modification, so they should not be present.
 
 5. Return deep copies of mutable fields in getters
@@ -108,6 +119,7 @@ Static Feature	Description	Example Usage
 5) Static Import - Allows direct use of static members	import static java.lang.Math.*;
 
 ## When to Use What?
+
 Use @PathVariable when the value is a key part of the resource path (e.g., /orders/{orderId}).
 Use @RequestParam for optional query parameters that refine the request (e.g., /orders?status=shipped).
 
