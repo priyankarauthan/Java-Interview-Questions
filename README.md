@@ -1025,8 +1025,17 @@ public class ThreadPoolExample {
 
 
 
+## Kafka Architecture
 
-
+| Component       | Description                                                                           |
+|-----------------|---------------------------------------------------------------------------------------|
+| Producer        | Sends messages (events) to Kafka topics.                                              |
+| Broker          | Kafka server that stores and manages messages.                                        |
+| Topic           | Logical name where messages are stored (similar to a table in databases).             |
+| Partition       | A topic is divided into partitions for scalability.                                   |
+| Consumer        | Reads messages from topics.                                                           |
+| Consumer Group  | A group of consumers that parallelly consume messages from a topic.                   |
+| Zookeeper       | Manages Kafka metadata, leader election, and configuration.                           |
 
 
 
