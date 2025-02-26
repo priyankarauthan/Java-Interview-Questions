@@ -944,6 +944,91 @@ Protect sensitive data – e.g., passwords, security keys.
 Avoid unnecessary serialization – e.g., cache data, large objects.
 Prevent serialization errors – e.g., when a field is not Serializable.
 
+### Java memory is divided into the following key regions:
+
+Heap Memory	Stores objects and instance variables (shared across threads).
+
+Stack Memory	Stores method-local variables, method calls, and references (per thread).
+
+Method Area (MetaSpace in Java 8+)	Stores class metadata, static variables, and constants.
+
+PC Register	Holds the address of the currently executing instruction.
+
+Native Method Stack	Used for native (JNI) method execution.
+
+### Can We Override a Static Method in Java?
+No, we cannot override a static method in Java. However, we can hide a static method in the child class.
+
+###   Why Can't We Override Static Methods?
+Method Overriding is Based on Dynamic Binding (Runtime Polymorphism)
+
+1) Static methods belong to the class, not the instance.
+Overriding works with instances, but static methods do not depend on objects.
+Static Methods are Resolved at Compile-Time
+
+2) Method overriding depends on dynamic method dispatch (runtime binding).
+Static methods are resolved at compile-time, so method calls are bound to the class, not the object.
+
+
+###  How to Create a Thread in Java?
+In Java, we can create a thread using two main approaches:
+
+a) Extending the Thread class
+b) Implementing the Runnable interface
+c)  Creating a Thread Using a Lambda Expression (Java 8+)
+Since Runnable is a functional interface, we can use a lambda expression to create a thread in a shorter way.
+
+✅ Example
+```
+public class LambdaThreadExample {
+    public static void main(String[] args) {
+        Thread t1 = new Thread(() -> {
+            System.out.println("Thread using lambda is running... " + Thread.currentThread().getName());
+        });
+
+        t1.start();
+    }
+}
+```
+d)Creating a Thread Using an Executor Service (ThreadPool)
+
+Instead of manually creating threads, we can use a thread pool for efficient thread management.
+
+✅ Example: Using ExecutorService
+```
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ThreadPoolExample {
+    public static void main(String[] args) {
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+
+        for (int i = 0; i < 5; i++) {
+            executor.execute(() -> {
+                System.out.println("Thread from pool: " + Thread.currentThread().getName());
+            });
+        }
+
+        executor.shutdown();
+    }
+}
+```
+
+## Which Approach Should You Use?
+
+| Method                   | Use Case                                                                                                                       |
+|--------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| Extending Thread         | When you need to create a thread by inheriting the Thread class (but not recommended due to lack of flexibility).               |
+| Implementing Runnable    | Preferred method, as Java supports only single inheritance, and we can implement multiple interfaces.                          |
+| Lambda Expression        | Best for short and simple thread tasks (Java 8+).                                                                               |
+| Executor Service (ThreadPool) | Best when managing multiple threads efficiently, especially in production.                                                  |
+
+
+
+
+
+
+
 
 
 
