@@ -718,6 +718,13 @@ Serialization is like saving an object as a file or converting it into a format 
 
 Imagine you have a Toy (Java Object), and you want to pack it into a box (Convert to a file or stream) so you can store it or send it to someone. Later, you can unpack (Deserialize) it to get back the same toy (Java Object).
 
+### transient Keyword:
+
+Fields marked as transient are not serialized.
+### serialVersionUID:
+
+A unique identifier to maintain version compatibility during deserialization.
+
 ## Where is Serialization Used in a Spring Boot Project?
 Serialization is widely used in Spring Boot for various functionalities, such as caching, session management, database operations, and messaging. 
 
