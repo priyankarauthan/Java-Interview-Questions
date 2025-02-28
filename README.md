@@ -1098,6 +1098,13 @@ public boolean equals(Object obj) {
 }
 ```
 
+### Deadlock Prevention
+
+Deadlocks occur when multiple threads acquire locks in different orders.
+The solution is to always acquire locks in a fixed order to prevent circular waiting.
+synchronized(LOCK1) first, then synchronized(LOCK2) ensures safe locking.
+
+
 
 
 
