@@ -85,15 +85,18 @@ Steps to Create an Immutable Class in Java
 To make a class immutable, follow these best practices:
 
 1. Declare the class as final
+   
 This prevents subclassing, which could allow modification of fields.
 
 final class ImmutableClass {
 2. Make all fields private and final
+
 Fields should be private to prevent direct access and final to ensure they are assigned only once.
 
 private final int id;
 private final String name;
 3. Initialize fields via a constructor
+
 Provide a constructor to initialize all fields.
 
 public ImmutableClass(int id, String name) {
@@ -105,6 +108,7 @@ public ImmutableClass(int id, String name) {
 Setters allow modification, so they should not be present.
 
 5. Return deep copies of mutable fields in getters
+   
 If a field is a mutable object (like a List or Date), return a defensive copy to prevent modification.
 
 public Date getDate() {
@@ -121,6 +125,7 @@ Static Feature	Description	Example Usage
 ## When to Use What?
 
 Use @PathVariable when the value is a key part of the resource path (e.g., /orders/{orderId}).
+
 Use @RequestParam for optional query parameters that refine the request (e.g., /orders?status=shipped).
 
 ## Ways to Represent a "Has-a" Relationship in Java:
@@ -158,6 +163,7 @@ public class Main {
 }
 ```
 Here, Car has-a Engine. If Car is destroyed, its Engine is also destroyed.
+
 # Aggregation (Weak Association)
 
 If the contained object can exist independently.
@@ -391,8 +397,7 @@ public class ThreadExample {
 🔹 Output:
 
 arduino
-Copy
-Edit
+
 Thread is running...
 ✅ Use Case: When we need to override Thread methods or maintain object-oriented behavior.
 
@@ -471,7 +476,10 @@ Extending Thread	Simple to use	Can't extend another class
 Implementing Runnable	Supports multiple inheritance	Requires Thread class to run
 Lambda Expression	More concise, readable	Only works for Runnable
 Executor Framework	Best for large-scale applications	Slightly complex to implement
+
+
 ## 🚀 Which One Should You Use?
+
 ✅ Use Runnable or Lambda when you don’t need to extend Thread.
 ✅ Use ExecutorService for multi-threading in real-world applications.
 ❌ Avoid directly extending Thread, unless necessary.
@@ -485,6 +493,7 @@ Executor Framework	Best for large-scale applications	Slightly complex to impleme
 In Java, you can create a thread by implementing Runnable or extending Thread, but the best choice depends on the use case.
 
 # 🔹 Implement Runnable When:
+
 ✅ You need to follow best practices – Implementing Runnable is the preferred approach.
 ✅ You need multiple inheritance – Since Java doesn’t support multiple inheritance, you can extend another class while implementing Runnable.
 ✅ You want to separate logic from threading behavior – The Runnable object can be passed to different Thread instances.
@@ -714,7 +723,7 @@ First, both methods are operated in general over the thread. So if we do use thr
 While in case of theadT1.run() method will be executed just likely the normal method by the “Main” thread without the creation of any new thread.
 
 ### Serialization 
-Serialization is like saving an object as a file or converting it into a format that can be stored or sent over a network.
+Serialization in Java is the process of converting an object into a byte stream so that it can be persisted to a file, sent over a network, or stored in a database. Deserialization is the reverse process, where the byte stream is converted back into an object.
 
 Imagine you have a Toy (Java Object), and you want to pack it into a box (Convert to a file or stream) so you can store it or send it to someone. Later, you can unpack (Deserialize) it to get back the same toy (Java Object).
 
@@ -726,6 +735,7 @@ Fields marked as transient are not serialized.
 A unique identifier to maintain version compatibility during deserialization.
 
 ## Where is Serialization Used in a Spring Boot Project?
+
 Serialization is widely used in Spring Boot for various functionalities, such as caching, session management, database operations, and messaging. 
 
 ## 🔹 Summary: Where Serialization is Used in Spring Boot
@@ -1103,6 +1113,29 @@ public boolean equals(Object obj) {
 Deadlocks occur when multiple threads acquire locks in different orders.
 The solution is to always acquire locks in a fixed order to prevent circular waiting.
 synchronized(LOCK1) first, then synchronized(LOCK2) ensures safe locking.
+
+
+### default Keyword in Java 8
+
+In Java 8, the default keyword is used to define default methods in interfaces. This allows interfaces to have method implementations without breaking existing implementing classes.
+
+## Why Default Methods?
+
+Before Java 8, interfaces could only have abstract methods. If a new method was added to an interface, all implementing classes had to implement it. Default methods solve this problem by allowing new methods with a default implementation.
+
+1)Backward Compatibility
+
+Allows adding new methods to interfaces without breaking existing implementations.
+
+2)  Multiple Inheritance Issue
+   
+If a class implements two interfaces with the same default method, Java forces an override to resolve ambiguity.
+
+### GENERICS
+
+Generics in Java are like templates that let you write code that works with different types of data without having to rewrite the same code for each type. They make your code more flexible, reusable, and type-safe.
+
+
 
 
 
