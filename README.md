@@ -1135,6 +1135,71 @@ If a class implements two interfaces with the same default method, Java forces a
 
 Generics in Java are like templates that let you write code that works with different types of data without having to rewrite the same code for each type. They make your code more flexible, reusable, and type-safe.
 
+### What is meant by asynchronous programming?
+
+Asynchronous programming is a programming paradigm that allows a program to initiate tasks that run separately from the main application thread, enabling the program to continue executing other operations without waiting for these tasks to complete. This approach enhances efficiency, especially in applications that perform time-consuming operations like file I/O, network requests, or database queries.
+
+
+### CompletableFuture 
+
+It is a class introduced in Java 8 that facilitates asynchronous programming. It allows you to run tasks in the background without blocking the main thread, enabling your application to perform other operations simultaneously.
+
+# Key Features:
+
+Asynchronous Execution: Run tasks independently without waiting for them to complete.
+
+Task Chaining: Link multiple tasks to run in sequence or in parallel, where each task can start after the previous one finishes.
+
+Manual Completion: Explicitly complete a task and provide its result when it's ready.
+
+Exception Handling: Gracefully manage errors that occur during asynchronous operations.
+
+Simple Example:
+
+Here's how you can use CompletableFuture to run a task asynchronously:
+
+```
+import java.util.concurrent.CompletableFuture;
+
+public class CompletableFutureExample {
+    public static void main(String[] args) {
+        // Run a task asynchronously
+        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+            // Simulate a long-running task
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Task completed!");
+        });
+
+        // Continue with other tasks...
+
+        // Wait for the asynchronous task to complete
+        future.join();
+    }
+}
+```
+In this example, the task runs in the background, allowing the main thread to proceed with other operations. The join() method ensures that the main thread waits for the asynchronous task to finish before exiting.
+
+By using CompletableFuture, you can write more efficient and responsive applications that handle multiple tasks concurrently without unnecessary delays.
+
+### Fork in Java
+In Java, the concept of "forking" is implemented through the Fork/Join framework, introduced in Java 7 as part of the java.util.concurrent package. This framework facilitates parallel execution by recursively dividing tasks into smaller subtasks (forking) and then combining their results (joining), aligning with the fork–join model of parallel computing. 
+
+
+# Key Components of the Fork/Join Framework:
+
+# ForkJoinPool: A specialized implementation of ExecutorService designed to manage and execute tasks that can be broken down into subtasks. It utilizes a work-stealing algorithm to efficiently distribute tasks among available threads. 
+
+
+# ForkJoinTask: An abstract class representing a task that can be subdivided into smaller tasks. Subclasses include RecursiveTask (which returns a result) and RecursiveAction (which does not return a result).
+
+
+
+
+
 
 
 
