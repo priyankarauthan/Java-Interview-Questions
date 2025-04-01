@@ -55,41 +55,65 @@ public void someMethod() {
 }
 ```
 
-## Garbage Collection (GC) in Java
-Garbage Collection (GC) in Java is an automatic memory management process that removes unused objects from heap memory to free up space and avoid memory leaks. It is handled by the JVM (Java Virtual Machine) and does not require explicit deallocation of objects.
+# Java Garbage Collection (GC)
+
+Garbage Collection (GC) in Java is an automatic memory management process that removes unused objects from memory, preventing memory leaks and optimizing performance.
+
+## 📌 How Garbage Collection Works
+Java uses **automatic memory management**, where the JVM tracks and removes objects that are no longer reachable.
+
+### 🔄 Phases of Garbage Collection
+1. **Mark** – Identifies all objects still in use.
+2. **Sweep** – Deletes objects that are no longer reachable.
+3. **Compact** – Moves remaining objects together to optimize memory allocation.
+
+## 🔥 JVM Memory Areas and GC
+Java memory is divided into different regions:
+
+### **1. Young Generation**
+- Contains newly created objects.
+- Uses **Minor GC** to clean up unused objects quickly.
+- Divided into:
+  - **Eden Space** (new objects)
+  - **Survivor Spaces (S0, S1)** (objects that survived Minor GC)
+
+### **2. Old Generation (Tenured Generation)**
+- Stores long-lived objects.
+- Uses **Major (Full) GC**.
+
+### **3. Metaspace (Java 8+)**
+- Stores class metadata.
+- Unlike **PermGen** (Java 7 and below), it can grow dynamically.
+
+## ⚡ Types of Garbage Collectors
+Java provides multiple GC implementations to optimize performance:
+
+| Garbage Collector | Description | JVM Option |
+|------------------|-------------|-------------|
+| **Serial GC** | Single-threaded, best for small applications | `-XX:+UseSerialGC` |
+| **Parallel GC** | Multi-threaded, best for multi-core systems | `-XX:+UseParallelGC` |
+| **CMS (Concurrent Mark-Sweep) GC** | Reduces pause time, suitable for low-latency applications (deprecated in Java 9+) | `-XX:+UseConcMarkSweepGC` |
+| **G1 (Garbage First) GC** | Divides heap into regions, balances throughput and latency | `-XX:+UseG1GC` |
+| **ZGC (Java 11+)** | Ultra-low latency, handles large heaps efficiently | `-XX:+UseZGC` |
+| **Shenandoah GC (Java 12+)** | Performs concurrent compaction with low-pause times | `-XX:+UseShenandoahGC` |
+
+## 🛠 Forcing Garbage Collection
+Though GC is automatic, you can suggest it using:
+```java
+System.gc();  // Requests GC (not guaranteed)
+Runtime.getRuntime().gc();
+```
+However, JVM **decides when to run GC**, so explicit calls are **not recommended**.
+
+## 🚀 Best Practices for Efficient GC
+- Use **object pooling** for expensive objects.
+- Set unused object references to `null`.
+- Avoid **memory leaks** (e.g., static references, unclosed resources).
+- Optimize **GC tuning parameters** based on profiling.
+- Use **profiling tools** like VisualVM, JConsole, Eclipse Memory Analyzer.
 
 
-Garbage collection (GC) is a form of automatic memory management that identifies and reclaims memory occupied by objects no longer in use by a program, thereby preventing memory leaks and optimizing available memory. Various algorithms are employed to perform this task, each with its own methodology and characteristics.
-
-## Common Garbage Collection Algorithms:
-
-### Tracing Garbage Collection:
-
-Mark-and-Sweep: This foundational algorithm operates in two primary phases:
-Mark Phase: Starting from a set of root references, the algorithm traverses all reachable objects, marking each as "in use."
-Sweep Phase: It then scans the entire memory, collecting objects that were not marked in the previous phase, as they are considered unreachable and thus eligible for reclamation.
-Tri-Color Marking: An enhancement over the basic mark-and-sweep, this algorithm categorizes objects into three sets—white (candidates for collection), gray (reachable but not fully processed), and black (fully processed and safe from collection). Objects transition between these sets during the GC process to efficiently identify and collect unreachable objects. 
-IT.WIKIPEDIA.ORG
-
-### Reference Counting:
-
-In this approach, each object maintains a count of references pointing to it. When a reference is created or destroyed, the count is adjusted accordingly. An object with a reference count of zero is deemed unreachable and can be safely collected. While straightforward, this method has limitations, notably its inability to handle reference cycles—situations where two or more objects reference each other, preventing their collection despite being unreachable from the program's roots. 
-WIKIPEDIA
-
-### Generational Garbage Collection:
-
-Based on the observation that most objects have short lifespans, this strategy divides objects into generations:
-Young Generation: Holds newly created objects, which are frequently collected due to their typically brief usage.
-Old (or Tenured) Generation: Contains objects that have survived multiple GC cycles, implying longer-term utility.
-By focusing GC efforts more frequently on the young generation, this method optimizes performance, reducing the overhead associated with collecting long-lived objects.
-
-### Escape Analysis:
-
-This compile-time technique assesses whether an object allocated within a function is accessible outside of it. If an object does not "escape" the function's scope, it can be allocated on the stack rather than the heap, allowing for automatic deallocation when the function exits. This reduces the burden on the garbage collector and enhances memory management efficiency. 
-
-Each of these algorithms offers distinct advantages and trade-offs. The choice of algorithm depends on factors such as the programming language in use, application requirements, and system constraints. Modern garbage collectors often integrate multiple strategies to balance efficiency, responsiveness, and throughput in memory management.
-
-
+  
 ## How Does Garbage Collection Work?
 
 Objects are allocated in heap memory when created using new.
