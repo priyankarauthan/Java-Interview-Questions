@@ -61,9 +61,9 @@ Garbage Collection (GC) in Java is an automatic memory management process that r
 
 Garbage collection (GC) is a form of automatic memory management that identifies and reclaims memory occupied by objects no longer in use by a program, thereby preventing memory leaks and optimizing available memory. Various algorithms are employed to perform this task, each with its own methodology and characteristics.
 
-### Common Garbage Collection Algorithms:
+## Common Garbage Collection Algorithms:
 
-# Tracing Garbage Collection:
+### Tracing Garbage Collection:
 
 Mark-and-Sweep: This foundational algorithm operates in two primary phases:
 Mark Phase: Starting from a set of root references, the algorithm traverses all reachable objects, marking each as "in use."
@@ -71,19 +71,19 @@ Sweep Phase: It then scans the entire memory, collecting objects that were not m
 Tri-Color Marking: An enhancement over the basic mark-and-sweep, this algorithm categorizes objects into three sets—white (candidates for collection), gray (reachable but not fully processed), and black (fully processed and safe from collection). Objects transition between these sets during the GC process to efficiently identify and collect unreachable objects. 
 IT.WIKIPEDIA.ORG
 
-# Reference Counting:
+### Reference Counting:
 
 In this approach, each object maintains a count of references pointing to it. When a reference is created or destroyed, the count is adjusted accordingly. An object with a reference count of zero is deemed unreachable and can be safely collected. While straightforward, this method has limitations, notably its inability to handle reference cycles—situations where two or more objects reference each other, preventing their collection despite being unreachable from the program's roots. 
 WIKIPEDIA
 
-# Generational Garbage Collection:
+### Generational Garbage Collection:
 
 Based on the observation that most objects have short lifespans, this strategy divides objects into generations:
 Young Generation: Holds newly created objects, which are frequently collected due to their typically brief usage.
 Old (or Tenured) Generation: Contains objects that have survived multiple GC cycles, implying longer-term utility.
 By focusing GC efforts more frequently on the young generation, this method optimizes performance, reducing the overhead associated with collecting long-lived objects.
 
-# Escape Analysis:
+### Escape Analysis:
 
 This compile-time technique assesses whether an object allocated within a function is accessible outside of it. If an object does not "escape" the function's scope, it can be allocated on the stack rather than the heap, allowing for automatic deallocation when the function exits. This reduces the burden on the garbage collector and enhances memory management efficiency. 
 
