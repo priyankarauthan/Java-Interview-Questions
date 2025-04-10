@@ -140,18 +140,20 @@ Steps to Create an Immutable Class in Java
 
 To make a class immutable, follow these best practices:
 
-1. Declare the class as final
+# 1. Declare the class as final
    
 This prevents subclassing, which could allow modification of fields.
 
 final class ImmutableClass {
-2. Make all fields private and final
+
+# 2. Make all fields private and final
 
 Fields should be private to prevent direct access and final to ensure they are assigned only once.
 
 private final int id;
 private final String name;
-3. Initialize fields via a constructor
+
+# 3. Initialize fields via a constructor
 
 Provide a constructor to initialize all fields.
 
@@ -159,11 +161,12 @@ public ImmutableClass(int id, String name) {
     this.id = id;
     this.name = name;
 }
-4. Do not provide setter methods
+
+# 4. Do not provide setter methods
 
 Setters allow modification, so they should not be present.
 
-5. Return deep copies of mutable fields in getters
+# 5. Return deep copies of mutable fields in getters
    
 If a field is a mutable object (like a List or Date), return a defensive copy to prevent modification.
 
