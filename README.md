@@ -1210,7 +1210,7 @@ Manual Completion: Explicitly complete a task and provide its result when it's r
 
 Exception Handling: Gracefully manage errors that occur during asynchronous operations.
 
-Simple Example:
+Simple Example:-
 
 Here's how you can use CompletableFuture to run a task asynchronously:
 
@@ -1242,15 +1242,20 @@ In this example, the task runs in the background, allowing the main thread to pr
 By using CompletableFuture, you can write more efficient and responsive applications that handle multiple tasks concurrently without unnecessary delays.
 
 ### Fork in Java
+
 In Java, the concept of "forking" is implemented through the Fork/Join framework, introduced in Java 7 as part of the java.util.concurrent package. This framework facilitates parallel execution by recursively dividing tasks into smaller subtasks (forking) and then combining their results (joining), aligning with the fork–join model of parallel computing. 
 
 
-# Key Components of the Fork/Join Framework:
+### Key Components of the Fork/Join Framework:
 
-# ForkJoinPool: A specialized implementation of ExecutorService designed to manage and execute tasks that can be broken down into subtasks. It utilizes a work-stealing algorithm to efficiently distribute tasks among available threads. 
+### ForkJoinPool:
+
+A specialized implementation of ExecutorService designed to manage and execute tasks that can be broken down into subtasks. It utilizes a work-stealing algorithm to efficiently distribute tasks among available threads. 
 
 
-# ForkJoinTask: An abstract class representing a task that can be subdivided into smaller tasks. Subclasses include RecursiveTask (which returns a result) and RecursiveAction (which does not return a result).
+### ForkJoinTask: 
+
+An abstract class representing a task that can be subdivided into smaller tasks. Subclasses include RecursiveTask (which returns a result) and RecursiveAction (which does not return a result).
 
 ## Steps to Design an Immutable Class in Java
 
