@@ -170,6 +170,41 @@ If a field is a mutable object (like a List or Date), return a defensive copy to
 public Date getDate() {
     return new Date(date.getTime());  // Defensive copy
 }
+
+
+Here's how you can design one properly:-
+
+```
+public final class Person {
+    private final String name;
+    private final int age;
+    private final List<String> hobbies;
+
+    public Person(String name, int age, List<String> hobbies) {
+        this.name = name;
+        this.age = age;
+        // Defensive copy to avoid external mutation
+        this.hobbies = hobbies == null ? List.of() : new ArrayList<>(hobbies);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public List<String> getHobbies() {
+        // Return a copy to preserve immutability
+        return new ArrayList<>(hobbies);
+    }
+}
+```
+
+
+
+
 ## 🔹 Summary Table
 Static Feature	Description	Example Usage
 1) Static Variable -	Shared by all instances of a class	static int count;
@@ -1257,55 +1292,9 @@ A specialized implementation of ExecutorService designed to manage and execute t
 
 An abstract class representing a task that can be subdivided into smaller tasks. Subclasses include RecursiveTask (which returns a result) and RecursiveAction (which does not return a result).
 
-## Steps to Design an Immutable Class in Java
 
-Here's how you can design one properly:-
-```
-public final class Person {
-    private final String name;
-    private final int age;
-    private final List<String> hobbies;
 
-    public Person(String name, int age, List<String> hobbies) {
-        this.name = name;
-        this.age = age;
-        // Defensive copy to avoid external mutation
-        this.hobbies = hobbies == null ? List.of() : new ArrayList<>(hobbies);
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public List<String> getHobbies() {
-        // Return a copy to preserve immutability
-        return new ArrayList<>(hobbies);
-    }
-}
-```
-### 🔒 Key Principles for Creating Immutable Classes
-
-a) Declare the class as final
-➤ Prevents subclassing which could allow mutation.
-
-b) Make all fields private and final
-➤ Prevents field reassignment and visibility outside the class.
-
-c) No setters
-➤ Mutator methods (setters) can modify internal state, violating immutability.
-
-d) Initialize all fields in the constructor
-➤ Ensures the object is fully initialized when created.
-
-e) Perform deep copy for mutable objects
-➤ Prevent reference leaks to mutable fields like collections or custom objects.
-
-f) Return copies of mutable fields in getters
-➤ Prevent clients from modifying internal state.
 
 
 
