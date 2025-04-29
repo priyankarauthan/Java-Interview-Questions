@@ -1295,6 +1295,74 @@ A specialized implementation of ExecutorService designed to manage and execute t
 
 An abstract class representing a task that can be subdivided into smaller tasks. Subclasses include RecursiveTask (which returns a result) and RecursiveAction (which does not return a result).
 
+### THRED SAFE DATA STRUCTURES
+
+#### 1. Concurrent Collections (from java.util.concurrent)
+
+ConcurrentHashMap — thread-safe version of HashMap.
+
+ConcurrentSkipListMap — thread-safe version of TreeMap (sorted map).
+
+ConcurrentSkipListSet — thread-safe version of TreeSet.
+
+CopyOnWriteArrayList — thread-safe version of ArrayList (optimized for more reads, fewer writes).
+
+CopyOnWriteArraySet — thread-safe Set based on CopyOnWriteArrayList.
+
+LinkedBlockingQueue — thread-safe queue for producer-consumer patterns (FIFO).
+
+ArrayBlockingQueue — bounded, thread-safe queue.
+
+PriorityBlockingQueue — unbounded, thread-safe priority queue.
+
+DelayQueue — queue where elements become available after a delay.
+
+SynchronousQueue — queue where insert and remove operations must happen simultaneously.
+
+LinkedTransferQueue — highly scalable, non-blocking queue.
+
+ConcurrentLinkedQueue — non-blocking, thread-safe queue (FIFO).
+
+ConcurrentLinkedDeque — non-blocking, thread-safe double-ended queue.
+
+#### 2. Synchronized Wrappers (from Collections.synchronizedXxx)
+
+(These provide coarse-grained synchronization — full method locking.)
+
+Collections.synchronizedList(List list) — wraps any list (e.g., ArrayList, LinkedList).
+
+Collections.synchronizedMap(Map map) — wraps any map (e.g., HashMap).
+
+Collections.synchronizedSet(Set set) — wraps any set.
+
+Collections.synchronizedSortedMap(SortedMap map) — wraps TreeMap.
+
+Collections.synchronizedSortedSet(SortedSet set) — wraps TreeSet.
+
+#### 3. Legacy Thread-Safe Classes (built-in synchronization)
+
+Vector — thread-safe dynamic array (older, slower, replaced by CopyOnWriteArrayList usually).
+
+Hashtable — thread-safe hash map (older, slower, replaced by ConcurrentHashMap).
+
+Stack — thread-safe (extends Vector).
+
+#### 4. Atomic Variables and Structures (from java.util.concurrent.atomic)
+
+AtomicInteger, AtomicLong, AtomicBoolean, AtomicReference — thread-safe primitive wrappers.
+
+AtomicIntegerArray, AtomicLongArray — thread-safe arrays.
+
+AtomicReferenceArray — thread-safe reference arrays.
+
+#### 5. Special Thread-Safe Data Structures
+
+Phaser, CyclicBarrier, CountDownLatch — for synchronization (though not exactly "data structures," still important).
+
+StampedLock — used for more efficient read/write locks compared to ReentrantReadWriteLock (not a data structure, but can make structures thread-safe with careful design).
+
+
+
 
 
 
