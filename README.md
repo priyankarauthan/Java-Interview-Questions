@@ -140,20 +140,20 @@ Steps to Create an Immutable Class in Java
 
 To make a class immutable, follow these best practices:
 
-# 1. Declare the class as final
+#### 1. Declare the class as final
    
 This prevents subclassing, which could allow modification of fields.
 
 final class ImmutableClass {
 
-# 2. Make all fields private and final
+#### 2. Make all fields private and final
 
 Fields should be private to prevent direct access and final to ensure they are assigned only once.
 
 private final int id;
 private final String name;
 
-# 3. Initialize fields via a constructor
+#### 3. Initialize fields via a constructor
 
 Provide a constructor to initialize all fields.
 
@@ -162,11 +162,11 @@ public ImmutableClass(int id, String name) {
     this.name = name;
 }
 
-# 4. Do not provide setter methods
+#### 4. Do not provide setter methods
 
 Setters allow modification, so they should not be present.
 
-# 5. Return deep copies of mutable fields in getters
+#### 5. Return deep copies of mutable fields in getters
    
 If a field is a mutable object (like a List or Date), return a defensive copy to prevent modification.
 
@@ -223,78 +223,70 @@ Use @PathVariable when the value is a key part of the resource path (e.g., /orde
 Use @RequestParam for optional query parameters that refine the request (e.g., /orders?status=shipped).
 
 ## Ways to Represent a "Has-a" Relationship in Java:
+
 In object-oriented design, a "has-a" relationship represents composition or aggregation, meaning one class contains an instance (or multiple instances) of another class. This is also known as object association.
 
-# Composition (Strong Association)
+#### 🔹 1. Inheritance (IS-A Relationship)
 
-If the contained object cannot exist without the container.
-Implemented using instance variables.
-Example:
+Type: Generalization / Specialization
+
+Meaning: One class is a subtype of another.
+
+Direction: Unidirectional (child → parent)
+
+Example: Dog IS-A Animal
+
+Use Case: Code reuse, polymorphism
+
 ```
-class Engine {
-    void start() {
-        System.out.println("Engine started");
-    }
-}
-
-class Car {
-    private Engine engine;  // Strong association (Composition)
-    
-    public Car() {
-        this.engine = new Engine(); // Created inside Car (Car owns Engine)
-    }
-
-    void startCar() {
-        engine.start();
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        Car car = new Car();
-        car.startCar();  // Engine started
-    }
-}
+class Animal {}
+class Dog extends Animal {}
 ```
-Here, Car has-a Engine. If Car is destroyed, its Engine is also destroyed.
+#### 🔹 2. Association (HAS-A Relationship)
+Type: Structural
 
-# Aggregation (Weak Association)
+Meaning: One class uses or refers to another.
 
-If the contained object can exist independently.
-The parent class holds a reference to the child class instead of owning it.
-Example:
+Direction: Unidirectional or Bidirectional
+
+Example: Student associated with College
+
 ```
-class Engine {
-    void start() {
-        System.out.println("Engine started");
-    }
-}
-
-class Car {
-    private Engine engine;  // Weak association (Aggregation)
-    
-    public Car(Engine engine) {  // Injected from outside
-        this.engine = engine;
-    }
-
-    void startCar() {
-        engine.start();
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        Engine engine = new Engine();  // Created independently
-        Car car = new Car(engine);    // Passed as a dependency
-        car.startCar();  // Engine started
-    }
+class College {}
+class Student {
+    private College college;
 }
 ```
-Here, Engine exists independently, and Car just has a reference to it.
-# Summary:
-Type	Relationship	Object Lifespan
-Composition	Strong association	Contained object depends on container
-Aggregation	Weak association	Contained object exists independently
+### 🔹 3. Aggregation (HAS-A but Weak Relationship)
+Type: Whole-Part (weak)
+
+Meaning: One class contains another, but both can exist independently.
+
+Direction: Usually Unidirectional
+
+Example: University has Departments
+
+```
+class Department {}
+class University {
+    private List<Department> departments;
+}
+```
+### 🔹 4. Composition (HAS-A and Strong Relationship)
+Type: Whole-Part (strong)
+
+Meaning: One class owns another. Lifecycles are tied.
+
+Direction: Unidirectional
+
+Example: Library contains Books. If Library is deleted, Books are too.
+
+```
+class Book {}
+class Library {
+    private List<Book> books = new ArrayList<>();
+}
+```
 
 ## The wait() and sleep() methods in Java are used to pause the execution of a thread, but they have different use cases and behaviours.
 
