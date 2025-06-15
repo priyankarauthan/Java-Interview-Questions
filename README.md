@@ -1356,12 +1356,51 @@ StampedLock — used for more efficient read/write locks compared to ReentrantRe
 
 
 
+### ✅ Checked Exceptions (must be handled or declared)
+
+These extend `Exception` but not `RuntimeException`.
+
+| Exception Type              | Description                                      |
+|----------------------------|--------------------------------------------------|
+| `IOException`              | Error during input/output operations             |
+| `FileNotFoundException`    | File not found during file read operation        |
+| `SQLException`             | Issues with database access                      |
+| `ParseException`           | Error while parsing data (e.g., dates)           |
+| `ClassNotFoundException`   | When a class is not found at runtime             |
+| `InterruptedException`     | When a thread is interrupted                     |
+| `CloneNotSupportedException` | Thrown when `clone()` is not supported         |
+
+✅ Checked exceptions occur at:
+⏱️ Compile Time
+
+📌 Explanation:
+Checked exceptions are checked by the Java compiler.
+
+If your code throws a checked exception, the compiler forces you to either:
+
+Handle it using try-catch, or
+
+Declare it using throws in the method signature.
+
+If you do neither, your code will not compile.
 
 
 
+---
 
+### ❌ Unchecked Exceptions (no need to handle, runtime error)
 
+These extend `RuntimeException`.
 
+| Exception Type                   | Description                                     |
+|----------------------------------|-------------------------------------------------|
+| `NullPointerException`           | Accessing members on a null object              |
+| `ArrayIndexOutOfBoundsException` | Accessing invalid index in array                |
+| `ArithmeticException`            | Division by zero                                |
+| `IllegalArgumentException`       | Invalid argument passed to a method             |
+| `NumberFormatException`          | Parsing a string that is not a valid number     |
+| `IllegalStateException`          | Method called at wrong time/state               |
+| `ClassCastException`             | Invalid casting between types                   |
 
 
 
