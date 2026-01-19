@@ -1409,6 +1409,32 @@ These extend `RuntimeException`.
 | `ClassCastException`             | Invalid casting between types                   |
 
 
+### How to check if two objects are equal?
+
+```
+class Student {
+    int id;
+    String name;
+
+    Student(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;     // same object
+        if (o == null) return false;    // null check
+        if (getClass() != o.getClass()) return false;
+
+        Student s = (Student) o;
+
+        return id == s.id &&
+               Objects.equals(name, s.name);
+    }
+}
+```
 
 
 
