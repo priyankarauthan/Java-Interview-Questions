@@ -1386,6 +1386,12 @@ If you do neither, your code will not compile.
 
 
 
+### What does synchronized do?
+
+It ensures that only ONE thread at a time can execute a particular block of code or method on the same object (lock).
+
+
+
 ---
 
 ### ❌ Unchecked Exceptions (no need to handle, runtime error)
