@@ -1436,6 +1436,105 @@ class Student {
 }
 ```
 
+# SOLID Principles
+
+SOLID is a set of five object-oriented design principles that help make software
+more maintainable, flexible, and scalable.
+
+---
+
+## S — Single Responsibility Principle (SRP)
+
+**Definition:**  
+A class should have only one reason to change.
+
+**Explanation:**  
+Each class should focus on a single responsibility or job. If a class handles
+multiple responsibilities, changes in one area may affect others.
+
+**Benefits:**
+- Easier to understand
+- Easier to maintain
+- Reduced risk of bugs
+
+---
+
+## O — Open/Closed Principle (OCP)
+
+**Definition:**  
+Software entities should be open for extension but closed for modification.
+
+**Explanation:**  
+You should be able to add new functionality without changing existing code.
+This is usually achieved using inheritance, interfaces, or composition.
+
+**Benefits:**
+- Reduces risk of breaking existing code
+- Encourages reusable and scalable designs
+
+---
+
+## L — Liskov Substitution Principle (LSP)
+
+**Definition:**  
+Subtypes must be substitutable for their base types without affecting correctness.
+
+**Explanation:**  
+Objects of a superclass should be replaceable with objects of its subclasses
+without breaking the application.
+
+**Benefits:**
+- Ensures reliable inheritance
+- Prevents unexpected runtime behavior
+
+---
+
+## I — Interface Segregation Principle (ISP)
+
+**Definition:**  
+Clients should not be forced to depend on interfaces they do not use.
+
+**Explanation:**  
+Instead of one large interface, create smaller, more specific interfaces so
+classes only implement what they actually need.
+
+**Benefits:**
+- Reduces unnecessary dependencies
+- Improves code clarity and flexibility
+
+---
+
+## D — Dependency Inversion Principle (DIP)
+
+**Definition:**  
+High-level modules should not depend on low-level modules.  
+Both should depend on abstractions.
+
+**Explanation:**  
+Depend on interfaces or abstract classes rather than concrete implementations.
+Details should depend on abstractions, not the other way around.
+
+**Benefits:**
+- Loose coupling
+- Easier testing
+- Easier to replace implementations
+
+---
+
+## Summary
+
+| Principle | Focus |
+|---------|-------|
+| SRP | One responsibility per class |
+| OCP | Extend behavior without modifying code |
+| LSP | Correct inheritance and substitution |
+| ISP | Small, focused interfaces |
+| DIP | Depend on abstractions, not implementations |
+
+---
+
+
+
 
 
 
