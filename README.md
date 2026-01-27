@@ -177,6 +177,14 @@ GC primarily occurs during idle CPU time to minimize performance impact.
 │ Native Stack  │
 └───────────────┘
 
+### String/ StringBuilder/ StringBuffer
+
+String → Immutable and thread-safe
+
+StringBuilder → Mutable and fast, not thread-safe
+
+StringBuffer → Mutable and thread-safe but slower
+
 
 ## How to Make a Class Immutable in Java?
 
