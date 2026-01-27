@@ -62,6 +62,36 @@ Garbage Collection (GC) in Java is an automatic memory management process that r
 ## 📌 How Garbage Collection Works
 Java uses **automatic memory management**, where the JVM tracks and removes objects that are no longer reachable.
 
+
+### Heap Structure (Very Important ⭐)
+
+Java heap is divided into:
+
+Young Generation
+  ├── Eden
+  ├── Survivor S0
+  └── Survivor S1
+
+Old Generation (Tenured)
+
+### Young Generation
+
+New objects are created in Eden
+
+Minor GC happens here
+
+Objects that survive move to Survivor spaces
+
+After multiple GCs → moved to Old Generation
+
+### Old Generation
+
+Stores long-living objects
+
+Major GC / Full GC happens here
+
+Slower than Minor GC
+
 ### 🔄 Phases of Garbage Collection
 1. **Mark** – Identifies all objects still in use.
 2. **Sweep** – Deletes objects that are no longer reachable.
