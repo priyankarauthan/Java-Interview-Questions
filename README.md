@@ -391,6 +391,95 @@ class Library {
 }
 ```
 
+
+# Difference Between HashMap and ConcurrentHashMap
+
+| Feature | HashMap | ConcurrentHashMap |
+|------|--------|------------------|
+| Thread Safety | ❌ Not thread-safe | ✅ Thread-safe |
+| Synchronization | ❌ No synchronization | ✅ Internal synchronization |
+| Null Key | ✅ Allows one null key | ❌ Not allowed |
+| Null Values | ✅ Allows multiple null values | ❌ Not allowed |
+| Performance | Faster in single-threaded | High performance in multithreaded |
+| Iterator Type | Fail-fast | Fail-safe |
+| Concurrent Modification | ❌ Throws `ConcurrentModificationException` | ✅ No exception |
+| Use Case | Single-threaded apps | Multi-threaded apps |
+
+---
+
+## Locking Mechanism Comparison
+
+| Aspect | HashMap | ConcurrentHashMap |
+|-----|--------|------------------|
+| Locking Used | ❌ No locking | ✅ Yes |
+| Lock Granularity | ❌ N/A | Fine-grained locking |
+| Java 7 Locking | ❌ Not applicable | Segment-level locking |
+| Java 8+ Locking | ❌ Not applicable | Bucket-level locking + CAS |
+| Whole Map Lock | ❌ No | ❌ No |
+| Concurrent Reads | ❌ Unsafe | ✅ Fully allowed |
+| Concurrent Writes | ❌ Unsafe | ✅ Safe |
+
+---
+
+## Locking Explanation
+
+### HashMap
+- No locking mechanism
+- Multiple threads can modify data simultaneously
+- Leads to:
+  - Data inconsistency
+  - Infinite loops (rehashing)
+  - Runtime exceptions
+
+---
+
+### ConcurrentHashMap (Java 7)
+- Map divided into **segments**
+- Each segment had its own lock
+- Multiple threads could access different segments at the same time
+
+---
+
+### ConcurrentHashMap (Java 8+)
+- Segment locking removed
+- Uses:
+  - **CAS (Compare-And-Swap)**
+  - **synchronized blocks** at bucket level
+- Much better scalability and performance
+
+---
+
+## Iterator Behavior
+
+| Map Type | Iterator Behavior |
+|-------|-----------------|
+| HashMap | Fail-fast (throws exception on modification) |
+| ConcurrentHashMap | Fail-safe (works during modification) |
+
+---
+
+## Key Interview One-Liner
+
+> HashMap is non-thread-safe with no locking, whereas ConcurrentHashMap is thread-safe using fine-grained locking (bucket-level in Java 8+) and does not allow null keys or values.
+
+```
+
+| Feature                         | Synchronized HashMap        | ConcurrentHashMap                      |
+| ------------------------------- | --------------------------- | -------------------------------------- |
+| Thread Safety                   | ✅ Yes                       | ✅ Yes                                  |
+| Locking Level                   | **Whole map lock**          | **Bucket-level locking**               |
+| Concurrent Reads                | ❌ Only one thread at a time | ✅ Multiple threads allowed             |
+| Concurrent Writes               | ❌ One thread at a time      | ✅ Multiple threads (different buckets) |
+| Performance                     | ❌ Slow                      | ✅ High                                 |
+| Null Key                        | ✅ Allowed                   | ❌ Not allowed                          |
+| Null Value                      | ✅ Allowed                   | ❌ Not allowed                          |
+| Iterator Type                   | Fail-fast                   | Fail-safe                              |
+| ConcurrentModificationException | ❌ Yes                       | ❌ No                                   |
+| Scalability                     | ❌ Poor                      | ✅ Excellent                            |
+
+```
+
+
 ## The wait() and sleep() methods in Java are used to pause the execution of a thread, but they have different use cases and behaviours.
 
 # 1. wait() Method
