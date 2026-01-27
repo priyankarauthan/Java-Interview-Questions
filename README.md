@@ -162,6 +162,22 @@ You can suggest GC using System.gc(), but it is not guaranteed to run immediatel
 
 GC primarily occurs during idle CPU time to minimize performance impact.
 
+
+### JVM Memory Areas (Quick Map)
+┌───────────────┐
+│   Stack       │ → Local variables, method calls
+├───────────────┤
+│   Heap        │ → Objects, instance variables
+├───────────────┤
+│ Method Area   │ → Class metadata, static variables
+│ (Metaspace)  │
+├───────────────┤
+│ PC Register   │
+├───────────────┤
+│ Native Stack  │
+└───────────────┘
+
+
 ## How to Make a Class Immutable in Java?
 
 An immutable class is a class whose objects cannot be modified after creation. All fields of an immutable object remain constant throughout its lifecycle.
