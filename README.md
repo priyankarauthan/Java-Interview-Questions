@@ -270,11 +270,60 @@ Static Feature	Description	Example Usage
 4) Static Nested Class	- Does not require an outer class instance	static class Inner {}
 5) Static Import - Allows direct use of static members	import static java.lang.Math.*;
 
-## When to Use What?
+### Difference Between @PathVariable and @RequestParam
+
+Both are used to read values from HTTP requests, but from different parts of the URL.
+
+Extracts value from the URL path
+
+Used to identify a specific resource
 
 Use @PathVariable when the value is a key part of the resource path (e.g., /orders/{orderId}).
 
 Use @RequestParam for optional query parameters that refine the request (e.g., /orders?status=shipped).
+
+
+#### 1️⃣ @PathVariable
+
+Extracts value from the URL path
+
+Used to identify a specific resource
+
+Example URL
+
+GET /users/101
+```
+@GetMapping("/users/{id}")
+public User getUser(@PathVariable int id) {
+    return userService.getUser(id);
+}
+```
+
+#### When to Use
+✔ Resource identification
+✔ RESTful URLs
+✔ Mandatory values
+
+### 2️⃣ @RequestParam
+
+Extracts value from query parameters
+
+Used for filters, search, optional data
+Example URL
+GET /users?age=25&city=Delhi
+```
+@GetMapping("/users")
+public List<User> getUsers(
+        @RequestParam int age,
+        @RequestParam String city) {
+    return userService.getUsers(age, city);
+}
+```
+```
+@RequestParam(required = false) String city
+```
+
+
 
 ## Ways to Represent a "Has-a" Relationship in Java:
 
