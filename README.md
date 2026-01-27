@@ -1533,6 +1533,37 @@ Details should depend on abstractions, not the other way around.
 
 ---
 
+### Method Hiding
+
+Method hiding occurs when a subclass defines a static method with the same signature as a static method in the parent class or interface. Static methods are resolved at compile time, so polymorphism does not apply.
+
+```
+interface Payment {
+
+    static void info() {
+        System.out.println("Payment interface static method");
+    }
+}
+
+class UpiPayment implements Payment {
+
+    static void info() {
+        System.out.println("UPI info");
+    }
+}
+
+public class PaymentTest {
+    public static void main(String[] args) {
+
+        Payment.info();       // Payment version
+        UpiPayment.info();    // UpiPayment version
+        // correct way
+    }
+}
+
+```
+
+
 
 
 
