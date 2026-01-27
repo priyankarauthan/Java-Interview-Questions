@@ -123,7 +123,7 @@ Java provides multiple GC implementations to optimize performance:
 | **Serial GC** | Single-threaded, best for small applications | `-XX:+UseSerialGC` |
 | **Parallel GC** | Multi-threaded, best for multi-core systems | `-XX:+UseParallelGC` |
 | **CMS (Concurrent Mark-Sweep) GC** | Reduces pause time, suitable for low-latency applications (deprecated in Java 9+) | `-XX:+UseConcMarkSweepGC` |
-| **G1 (Garbage First) GC** | Divides heap into regions, balances throughput and latency | `-XX:+UseG1GC` |
+| **G1 (Garbage First) GC** | Divides heap into regions, balances throughput and latency, Performs incremental GC,Large heap applications & Microservices | `-XX:+UseG1GC` |
 | **ZGC (Java 11+)** | Ultra-low latency, handles large heaps efficiently | `-XX:+UseZGC` |
 | **Shenandoah GC (Java 12+)** | Performs concurrent compaction with low-pause times | `-XX:+UseShenandoahGC` |
 
