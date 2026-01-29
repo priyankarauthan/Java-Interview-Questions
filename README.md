@@ -1756,6 +1756,17 @@ public class PaymentTest {
 ```
 
 
+### ✅ Executor Framework
+
+The Executor Framework is a Java API that manages thread creation, reuse, and execution using thread pools, so developers don’t have to handle threads manually.
+
+### CompletableFuture 
+
+CompletableFuture is a Java class used to run asynchronous, non-blocking tasks and to chain, combine, and handle the results of those tasks in a clean and flexible way.
+
+**CompletableFuture = async task + result + chaining**
+
+
 
 
 
