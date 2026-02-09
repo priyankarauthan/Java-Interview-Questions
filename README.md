@@ -1767,6 +1767,18 @@ CompletableFuture is a Java class used to run asynchronous, non-blocking tasks a
 **CompletableFuture = async task + result + chaining**
 
 
+#### | Variable Type                   | Stored In                              |
+| ------------------------------- | -------------------------------------- |
+| Local variable                  | Stack                                  |
+| Instance variable               | Heap                                   |
+| `static` variable               | Method Area (Metaspace)                |
+| `final` local variable          | Stack                                  |
+| `final` instance variable       | Heap                                   |
+| `static final` variable         | Method Area                            |
+| `static final` reference object | Heap (object), Method Area (reference) |
+
+
+
 
 
 
