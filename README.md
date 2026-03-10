@@ -1,10 +1,16 @@
 ## Java-Interview-Questions
 
+- [Executor Service](#executorservice) 
+
+
+
+
+
 When a class implements two interfaces that have the same default method, Java does not know which method to use, and it results in a compilation error unless the class provides its own implementation.
 
 Example Scenario
 
-```java
+```
 interface A {
     default void show() {
         System.out.println("A's show method");
@@ -748,12 +754,166 @@ public class ExecutorExample {
 Thread executed using ExecutorService
 ✅ Use Case: When we need better thread management and scalability.
 
-# 🔥 Summary Table
-Approach	Pros	Cons
-Extending Thread	Simple to use	Can't extend another class
-Implementing Runnable	Supports multiple inheritance	Requires Thread class to run
-Lambda Expression	More concise, readable	Only works for Runnable
-Executor Framework	Best for large-scale applications	Slightly complex to implement
+## ExecutorService 
+
+ExecutorService is used to manage and execute multiple threads concurrently without manually creating threads.
+It is part of the java.util.concurrent package.
+In Java, ExecutorService is used to manage and execute multiple threads concurrently without manually creating threads.
+It is part of the java.util.concurrent package.
+
+Instead of doing:
+
+new Thread().start();
+
+We use ExecutorService, which provides a thread pool to efficiently manage threads.
+
+1️⃣ Basic Idea
+
+ExecutorService works like a thread manager.
+
+Tasks submitted
+      ↓
+ExecutorService
+      ↓
+Thread Pool
+      ↓
+Tasks executed concurrently
+
+Benefits:
+
+Reuses threads (better performance)
+
+Avoids creating too many threads
+
+Better thread lifecycle management
+
+2️⃣ Creating an ExecutorService
+
+Most common way:
+
+ExecutorService executor = Executors.newFixedThreadPool(3);
+
+This creates a thread pool with 3 threads.
+
+Meaning 3 tasks can run at the same time.
+
+3️⃣ Example: Running Tasks Concurrently
+
+```
+public class ExecutorExample {
+
+    public static void main(String[] args) {
+
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+
+        for(int i = 1; i <= 5; i++) {
+
+            int task = i;
+
+            executor.submit(() -> {
+                System.out.println(
+                    "Task " + task +
+                    " executed by " +
+                    Thread.currentThread().getName()
+                );
+            });
+        }
+
+        executor.shutdown();
+    }
+}
+```
+Example Output
+Task 1 executed by pool-1-thread-1
+Task 2 executed by pool-1-thread-2
+Task 3 executed by pool-1-thread-3
+Task 4 executed by pool-1-thread-1
+Task 5 executed by pool-1-thread-2
+
+Threads are reused.
+
+4️⃣ submit() vs execute()
+execute()
+executor.execute(task);
+
+Runs task
+
+Does not return result
+
+submit()
+Future<Integer> future = executor.submit(task);
+
+Returns Future
+
+Can retrieve result
+
+Example:
+
+Future<Integer> future = executor.submit(() -> 10 + 20);
+
+System.out.println(future.get());
+
+Output:
+
+30
+5️⃣ Types of ExecutorService Thread Pools
+Fixed Thread Pool
+Executors.newFixedThreadPool(5)
+
+Fixed number of threads.
+
+Cached Thread Pool
+Executors.newCachedThreadPool()
+
+Creates threads as needed.
+
+Single Thread Executor
+Executors.newSingleThreadExecutor()
+
+Only one thread executes tasks sequentially.
+
+Scheduled Thread Pool
+Executors.newScheduledThreadPool(2)
+
+Used for scheduled tasks.
+
+Example:
+
+scheduleAtFixedRate()
+6️⃣ Proper Shutdown
+
+Always shutdown ExecutorService.
+
+executor.shutdown();
+
+or
+
+executor.shutdownNow();
+
+Difference:
+
+Method	Behavior
+shutdown()	finishes existing tasks
+shutdownNow()	stops immediately
+7️⃣ Real World Example
+
+Suppose you are calling multiple APIs concurrently.
+
+ExecutorService executor = Executors.newFixedThreadPool(3);
+
+executor.submit(() -> callUserService());
+executor.submit(() -> callOrderService());
+executor.submit(() -> callPaymentService());
+
+All three APIs execute in parallel.
+
+8️⃣ Why ExecutorService Is Better Than Thread
+Thread	ExecutorService
+Manual thread creation	Thread pool management
+Hard to scale	Easy scalability
+No lifecycle control	Controlled shutdown
+No result handling	Supports Future
+
 
 
 ## 🚀 Which One Should You Use?
