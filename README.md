@@ -835,30 +835,35 @@ Task 5 executed by pool-1-thread-2
 
 Threads are reused.
 
-4️⃣ submit() vs execute()
-execute()
-executor.execute(task);
+4️⃣ submit() vs execute() 
 
-Runs task
+Use execute() when
 
-Does not return result
+a) You don't need a result
 
-submit()
-Future<Integer> future = executor.submit(task);
-
-Returns Future
-
-Can retrieve result
+b) You just want to run a background task
 
 Example:
 
-Future<Integer> future = executor.submit(() -> 10 + 20);
+Logging
 
-System.out.println(future.get());
+Fire-and-forget tasks
 
-Output:
+Use submit() when
 
-30
+a) You need a return value
+
+b) You want to track task completion
+
+c) You need exception handling through Future
+
+Example:
+
+Database queries
+
+API calls returning responses
+
+
 5️⃣ Types of ExecutorService Thread Pools
 Fixed Thread Pool
 Executors.newFixedThreadPool(5)
