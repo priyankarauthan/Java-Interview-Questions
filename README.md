@@ -1,6 +1,9 @@
 ## Java-Interview-Questions
 
-- [Executor Service](#executorservice) 
+- [Executor Service](#executorservice)
+- [Serializable](#serializable)
+- [Functional Interface](#functional-interface)
+- [Garbage Collection](#garbage-collection)
 
 
 
@@ -61,7 +64,7 @@ public void someMethod() {
 }
 ```
 
-# Java Garbage Collection (GC)
+## Garbage Collection
 
 Garbage Collection (GC) in Java is an automatic memory management process that removes unused objects from memory, preventing memory leaks and optimizing performance.
 
@@ -1381,7 +1384,7 @@ Clearly tells other developers that the interface is intended for functional pro
 Enables lambda expressions
 Functional interfaces are essential for Java’s functional programming features, especially in Java 8 and later.
 
-### Serializable in Java
+### Serializable
 
 The Serializable interface in Java is a marker interface (i.e., it has no methods) that allows an object to be converted into a byte stream so that it can be saved to a file, sent over a network, or stored in a database.
 
@@ -1463,9 +1466,6 @@ Instead of manually creating threads, we can use a thread pool for efficient thr
 
 ✅ Example: Using ExecutorService
 ```
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 public class ThreadPoolExample {
     public static void main(String[] args) {
         ExecutorService executor = Executors.newFixedThreadPool(3);
