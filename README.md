@@ -9,9 +9,6 @@
 
 ## JVM Memory
 
-
-
-               JVM MEMORY
 ------------------------------------------------
 |                 Heap                         |
 |        (Objects, Arrays, Instances)         |
@@ -29,7 +26,8 @@
 ------------------------------------------------
 
 
-**1. Heap Memory**
+**1. Heap Memory** 
+
 
 The Heap stores objects and instance variables.
 
@@ -44,7 +42,7 @@ Heap
       ├── id
       └── name
 
-**Characteristics:**
+**Characteristics:** 
 
 Shared by all threads
 
@@ -52,7 +50,7 @@ Largest memory area
 
 Managed by Garbage Collector (GC)
 
-**Heap contains:**
+**Heap contains:** 
 
 Young Generation
 Old Generation
@@ -71,7 +69,7 @@ int[] arr = new int[5];
 
 Array stored in Heap.
 
-**2. Stack Memory**
+**2. Stack Memory** 
 
 Each thread has its own stack.
 
@@ -122,7 +120,7 @@ methodB()
 
 Each method creates one stack frame.
 
-**3. Method Area**
+**3. Method Area** 
 
 The Method Area stores class-level information.
 
@@ -155,7 +153,7 @@ Shared across all threads.
 
 In modern JVM implementations, the method area is implemented as Metaspace.
 
-**4. Program Counter (PC Register)**
+**4. Program Counter (PC Register)** 
 
 Each thread has its own PC register.
 
@@ -171,7 +169,7 @@ Line 12 executing
 
 The PC register tracks which instruction JVM should execute next.
 
-**5. Native Method Stack**
+**5. Native Method Stack** 
 
 Used when Java calls native methods written in C/C++.
 
