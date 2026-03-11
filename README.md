@@ -4,7 +4,188 @@
 - [Serializable](#serializable)
 - [Functional Interface](#functional-interface)
 - [Garbage Collection](#garbage-collection)
+- [JVM Memory](#jvm-memory)
 
+
+## JVM Memory
+
+
+
+               JVM MEMORY
+------------------------------------------------
+|                 Heap                         |
+|        (Objects, Arrays, Instances)         |
+------------------------------------------------
+|               Method Area                    |
+|   Class Metadata, Static Variables, Code    |
+------------------------------------------------
+|   Stack (Thread 1)   |   Stack (Thread 2)   |
+|   method calls       |   method calls       |
+|   local variables    |   local variables    |
+------------------------------------------------
+|         PC Register (per thread)             |
+------------------------------------------------
+|           Native Method Stack                |
+------------------------------------------------
+
+
+**1. Heap Memory**
+
+The Heap stores objects and instance variables.
+
+Example:
+
+Student s = new Student();
+
+Memory allocation:
+
+Heap
+ └── Student object
+      ├── id
+      └── name
+
+**Characteristics:**
+
+Shared by all threads
+
+Largest memory area
+
+Managed by Garbage Collector (GC)
+
+**Heap contains:**
+
+Young Generation
+Old Generation
+
+Example objects stored:
+
+Objects created with new
+
+Instance variables
+
+Arrays
+
+Example:
+
+int[] arr = new int[5];
+
+Array stored in Heap.
+
+**2. Stack Memory**
+
+Each thread has its own stack.
+
+The stack stores:
+
+Local variables
+
+Method calls
+
+Method parameters
+
+Partial results
+
+Example:
+```
+public void add() {
+    int a = 10;
+    int b = 20;
+}
+```
+
+Memory:
+
+Stack
+ └── add()
+      ├── a
+      └── b
+
+Important properties:
+
+Created when thread starts
+
+Destroyed when thread ends
+
+Very fast access
+
+Thread-safe (each thread has its own stack)
+
+Stack also contains Stack Frames.
+
+Example call stack:
+
+main()
+   ↓
+methodA()
+   ↓
+methodB()
+
+Each method creates one stack frame.
+
+**3. Method Area**
+
+The Method Area stores class-level information.
+
+Stored items:
+
+Class metadata
+
+Method code
+
+Static variables
+
+Runtime constant pool
+
+Example:
+```
+class Employee {
+    static int count = 0;
+
+    void display() {}
+}
+```
+Memory:
+
+Method Area
+ ├── Employee class metadata
+ ├── static variable count
+ └── method bytecode display()
+
+Shared across all threads.
+
+In modern JVM implementations, the method area is implemented as Metaspace.
+
+**4. Program Counter (PC Register)**
+
+Each thread has its own PC register.
+
+It stores:
+
+Address of the currently executing instruction
+
+Example:
+
+Line 10 executing
+Line 11 executing
+Line 12 executing
+
+The PC register tracks which instruction JVM should execute next.
+
+**5. Native Method Stack**
+
+Used when Java calls native methods written in C/C++.
+
+Example:
+
+System.out.println("Hello");
+
+Internally calls native code.
+
+Native stack handles:
+
+JNI calls
+
+OS-level operations
 
 
 
