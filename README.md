@@ -5,6 +5,7 @@
 - [Functional Interface](#functional-interface)
 - [Garbage Collection](#garbage-collection)
 - [JVM Memory](#jvm-memory)
+- [Garbage Collection](#garbage-collection)
 
 
 ## JVM Memory
@@ -177,6 +178,273 @@ OS-level operations
 | Location (Java 8+) | Heap                  | Method Area / Metaspace       |
 
 
+
+## Garbage Collection
+
+Garbage Collection is the automatic process of removing unused objects from memory (Heap) so that memory can be reused.
+
+In Java, developers do not manually free memory like in C/C++.
+
+The JVM automatically deletes objects that are no longer reachable.
+
+Example
+```
+Student s = new Student();
+s = null;
+```
+
+Here:
+
+Object created in Heap
+
+Reference removed
+
+Object becomes eligible for Garbage Collection
+
+Memory:
+
+Heap
+ └── Student object  ❌ (no reference)
+
+GC will remove it.
+
+## Why Garbage Collection is Needed ?
+
+Without GC:
+
+Memory keeps filling up
+
+Application crashes
+
+Memory leaks occur
+
+GC helps:
+
+✔ Automatic memory management
+✔ Prevents memory leaks
+✔ Improves performance
+✔ Simplifies development
+
+Important Concept: Reachability
+
+JVM uses reachability analysis.
+
+An object is alive if it is reachable from:
+
+Stack references
+
+Static references
+
+JNI references
+
+Active threads
+
+If no reference exists → object becomes garbage.
+
+Example:
+```
+Student s1 = new Student();
+Student s2 = new Student();
+
+s1 = s2;
+```
+
+Memory:
+
+Heap
+ ├── Student1 ❌ unreachable
+ └── Student2 ✔ reachable
+
+Student1 becomes eligible for GC.
+
+## JVM Heap Structure
+
+Garbage collection works inside Heap memory.
+
+Heap is divided into generations.
+
+Heap
+│
+├── Young Generation
+│     ├── Eden
+│     ├── Survivor S0
+│     └── Survivor S1
+│
+└── Old Generation
+
+
+**1. Young Generation**
+
+Where new objects are created.
+
+Contains:
+
+Eden
+Survivor 0
+Survivor 1
+
+**Flow:**
+
+New Object
+   ↓
+Eden
+   ↓ (Minor GC)
+Survivor Space
+   ↓
+Old Generation
+Eden Space
+
+All new objects are created here.
+
+Example:
+
+Student s = new Student();
+
+Stored in:
+
+Eden Space
+
+When Eden becomes full:
+
+➡ Minor GC occurs
+
+Survivor Spaces (S0 & S1)
+
+Two survivor spaces exist:
+
+S0
+S1
+
+Objects that survive GC move between these spaces.
+
+Flow example:
+
+Eden → S0 → S1 → Old Generation
+
+If object survives many GC cycles → moved to Old Generation.
+
+2. Old Generation (Tenured Space)
+
+Stores long-lived objects.
+
+Examples:
+
+Singleton objects
+
+Cached objects
+
+Long-running session objects
+
+When Old Generation fills:
+
+➡ Major GC (Full GC) occurs.
+
+Types of Garbage Collection
+1. Minor GC
+
+Occurs in Young Generation.
+
+Triggered when:
+
+Eden Space becomes full
+
+Steps:
+
+Identify reachable objects
+
+Move them to Survivor space
+
+Delete unreachable objects
+
+Fast operation.
+
+2. Major GC
+
+Occurs in Old Generation.
+
+Triggered when:
+
+Old Generation becomes full
+
+Steps:
+
+Scan entire heap
+
+Remove unused objects
+
+Compact memory
+
+Slower than Minor GC.
+
+3. Full GC
+
+Full GC cleans:
+
+Young Generation
+Old Generation
+Metaspace
+
+This is the slowest GC.
+
+Garbage Collection Algorithms
+
+Different JVMs use different GC algorithms.
+
+1. Serial GC
+Single thread GC
+Stop-the-world
+
+Use when:
+
+Small applications
+
+2. Parallel GC
+Multiple GC threads
+High throughput
+
+Default in older Java versions.
+
+3. G1 GC
+
+Garbage First (G1) GC
+
+Default GC in modern Java.
+
+Features:
+
+Region-based heap
+
+Predictable pause times
+
+Good for large applications
+
+4. ZGC
+
+Z Garbage Collector
+
+Features:
+
+Ultra low latency (<10 ms)
+
+Handles very large heaps
+
+Mostly concurrent
+
+Used in:
+
+Financial systems
+
+Low-latency services
+
+5. Shenandoah GC
+
+Another low pause time GC.
+
+Features:
+
+Concurrent compaction
+
+Very small pause times
 
 
 
