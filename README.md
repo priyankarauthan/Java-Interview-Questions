@@ -9,23 +9,6 @@
 
 ## JVM Memory
 
-------------------------------------------------
-|                 Heap                         |
-|        (Objects, Arrays, Instances)         |
-------------------------------------------------
-|               Method Area                    |
-|   Class Metadata, Static Variables, Code    |
-------------------------------------------------
-|   Stack (Thread 1)   |   Stack (Thread 2)   |
-|   method calls       |   method calls       |
-|   local variables    |   local variables    |
-------------------------------------------------
-|         PC Register (per thread)             |
-------------------------------------------------
-|           Native Method Stack                |
-------------------------------------------------
-
-
 **1. Heap Memory** 
 
 
