@@ -169,6 +169,15 @@ JNI calls
 OS-level operations
 
 
+| Feature            | String Pool           | Runtime Constant Pool         |
+| ------------------ | --------------------- | ----------------------------- |
+| Purpose            | Store string literals | Store class constants         |
+| Scope              | Global                | Per class                     |
+| Stored items       | Only strings          | Strings, numbers, method refs |
+| Location (Java 8+) | Heap                  | Method Area / Metaspace       |
+
+
+
 
 
 When a class implements two interfaces that have the same default method, Java does not know which method to use, and it results in a compilation error unless the class provides its own implementation.
