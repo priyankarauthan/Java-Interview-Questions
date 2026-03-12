@@ -7,7 +7,154 @@
 - [JVM Memory](#jvm-memory)
 - [Garbage Collection](#garbage-collection)
 - [If you committed code with the wrong commit message in Git, you can update it using git commit --amend](#git-wrong-commit-update)
+- [How do you Dockerize a Spring Boot Application?](#how-do-you-dockerize-a-spring-boot-application?)
 
+
+
+## How do you Dockerize a Spring Boot Application?
+```
+Step 1 Build Jar 
+mvn clean package 
+Step 2 Dockerfile 
+FROM openjdk:17 
+COPY target/app.jar app.jar 
+ENTRYPOINT ["java","-jar","app.jar"] 
+Step 3 Build Image 
+docker build -t springboot-app . 
+Step 4 Run Container 
+docker run -p 8080:8080 springboot-app 
+```
+##  How to check running containers? 
+
+docker ps 
+
+All containers: 
+
+docker ps -a 
+
+##  What is Docker Registry?
+
+A Docker registry is a storage system for Docker images.
+
+Examples:
+
+Docker Hub 
+
+AWS ECR 
+
+Google Container Registry 
+
+Azure Container Registry 
+
+**Push image:** 
+
+docker push username/app:latest 
+
+
+## 1️⃣ Check Docker Version 
+docker --version
+
+Shows installed Docker version. 
+
+2️⃣ Pull an Image 
+
+Downloads an image from Docker Hub.
+
+docker pull nginx
+
+Example:
+
+docker pull mysql
+3️⃣ List Docker Images 
+docker images
+
+Shows all images in your system.
+
+Example output:
+
+REPOSITORY   TAG       IMAGE ID
+nginx        latest    123abc
+mysql        8.0       456def 
+4️⃣ Run a Container 
+
+Run container from image.
+
+docker run nginx
+
+Run in background:
+
+docker run -d nginx
+
+Run with port mapping:
+
+docker run -d -p 8080:80 nginx
+
+Meaning:
+
+HostPort:ContainerPort 
+5️⃣ List Running Containers 
+docker ps
+
+Show all containers:
+
+docker ps -a 
+6️⃣ Stop Container 
+docker stop container_id
+
+Example:
+
+docker stop 5d8f2a 
+7️⃣ Start Container 
+docker start container_id 
+8️⃣ Remove Container 
+docker rm container_id
+
+Force remove:
+
+docker rm -f container_id 
+9️⃣ Remove Image 
+docker rmi image_id
+
+Example:
+
+docker rmi nginx 
+🔟 Build Docker Image (Important for Spring Boot) 
+docker build -t myapp .
+
+Meaning:
+
+-t = tag name
+.  = Dockerfile location 
+1️⃣1️⃣ Run Spring Boot Application Container 
+
+Example:
+
+docker run -d -p 8080:8080 myapp
+
+Now application runs at:
+
+http://localhost:8080 
+1️⃣2️⃣ View Container Logs
+docker logs container_id
+
+Follow logs:
+
+docker logs -f container_id 
+1️⃣3️⃣ Execute Command Inside Container 
+docker exec -it container_id bash
+
+Example:
+
+docker exec -it 23abf bash 
+1️⃣4️⃣ Docker System Cleanup 
+
+Remove unused containers/images:
+
+docker system prune 
+1️⃣5️⃣ Inspect Container 
+docker inspect container_id
+
+Shows container configuration. 
 
 
 ## Git Wrong Commit Update 
