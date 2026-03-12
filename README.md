@@ -8,6 +8,39 @@
 - [Garbage Collection](#garbage-collection)
 - [If you committed code with the wrong commit message in Git, you can update it using git commit --amend](#git-wrong-commit-update)
 - [How do you Dockerize a Spring Boot Application?](#how-do-you-dockerize-a-spring-boot-application?)
+- [How to Create Immutable Class?](#how-to-create-immutable-class?)
+
+
+## How to Create Immutable Class?
+
+An immutable class is a class whose objects cannot be changed after they are created.
+
+Once the object is created, its state (data) remains constant.
+
+Example of immutable class in Java:-
+
+String ,Integer,LocalDate
+
+Example:
+
+String name = "John"; 
+name.concat(" Doe"); 
+
+name remains "John" because String is immutable.
+
+##  Rules to Create an Immutable Class
+
+To make a class immutable, follow these rules:-
+
+Declare the class as final 
+
+Make all fields private and final 
+
+Do not provide setter methods 
+
+Initialize fields via constructor 
+
+Return copies of mutable objects if necessary 
 
 
 
