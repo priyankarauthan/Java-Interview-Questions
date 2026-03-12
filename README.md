@@ -40,7 +40,15 @@ Do not provide setter methods
 
 Initialize fields via constructor 
 
-Return copies of mutable objects if necessary 
+Return copies of mutable objects if necessary (If a class contains mutable objects (like Date), we must return copies.) 
+
+## Advantages of Immutable Classes
+
+1️⃣ Thread-safe
+2️⃣ No synchronization needed
+3️⃣ Safe to use in collections
+4️⃣ Prevents accidental modification
+5️⃣ Good for caching and sharing objects
 
 
 
