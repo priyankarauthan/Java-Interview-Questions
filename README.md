@@ -6,6 +6,86 @@
 - [Garbage Collection](#garbage-collection)
 - [JVM Memory](#jvm-memory)
 - [Garbage Collection](#garbage-collection)
+- [If you committed code with the wrong commit message in Git, you can update it using git commit --amend](#git-wrong-commit-update)
+
+
+
+## Git Wrong Commit Update 
+
+**1️⃣ If Commit is NOT Pushed Yet (Most Common)**
+
+Use:
+
+git commit --amend -m "Correct commit message"
+Example
+```
+Wrong commit:
+
+git commit -m "fix"
+
+Update it:
+
+git commit --amend -m "Fix null pointer issue in UserService"
+```
+
+This replaces the last commit message.
+
+**2️⃣ If Commit is Already Pushed**
+
+If the commit is already pushed to remote:
+
+Step 1
+```
+git commit --amend -m "Correct commit message"
+```
+Step 2 (Force Push)
+```
+git push --force
+```
+
+⚠️ Be careful with force push because it rewrites Git history.
+
+Better safer command:
+```
+git push --force-with-lease
+```
+**3️⃣ If You Want to Change Older Commit Message**
+
+Use interactive rebase.
+```
+git rebase -i HEAD~3
+```
+
+Example output:
+
+pick a1b2c3 First commit
+pick d4e5f6 Second commit
+pick g7h8i9 Third commit
+
+Change:
+
+pick → reword
+reword a1b2c3 First commit
+pick d4e5f6 Second commit
+pick g7h8i9 Third commit
+
+Git will open an editor to update the message.
+
+4️⃣ Interview Answer (Best Way)
+
+
+## Question- You committed code with the wrong message. How will you update it?
+
+Answer:
+
+If the commit is the latest one and not pushed, I will use
+git commit --amend -m "new message".
+
+If it is already pushed, I will amend the commit and use
+git push --force-with-lease to update the remote repository.
+
+If the commit is older, I will use interactive rebase (git rebase -i) to modify the commit message.
+
 
 
 ## JVM Memory
