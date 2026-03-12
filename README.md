@@ -532,7 +532,7 @@ Application crashes
 
 Memory leaks occur
 
-GC helps:
+## GC helps:
 
 ✔ Automatic memory management
 ✔ Prevents memory leaks
@@ -702,7 +702,7 @@ This is the slowest GC.
 
 Garbage Collection Algorithms
 
-Different JVMs use different GC algorithms.
+## Different JVMs use different GC algorithms.
 
 1. Serial GC
 Single thread GC
@@ -1517,16 +1517,36 @@ It is part of the java.util.concurrent package.
 In Java, ExecutorService is used to manage and execute multiple threads concurrently without manually creating threads.
 It is part of the java.util.concurrent package.
 
+Instead of creating threads manually, we give tasks to the executor, and it handles thread creation, reuse, and scheduling.
+
 Instead of doing:
 
 new Thread().start();
 
 We use ExecutorService, which provides a thread pool to efficiently manage threads.
 
+## Problem Without Executor Framework
+
+Too many threads may get created 
+
+Hard to manage 
+
+Performance issues 
+
+## With Executor Framework 
+Executor Framework uses a thread pool. 
+
+Thread pool = a group of reusable threads 
+
+Instead of creating new threads every time, tasks are sent to the pool of existing threads. 
+
+##  How It Works (Simple Flow)
+Task → Executor → Thread Pool → Execution
+
 1️⃣ Basic Idea
 
 ExecutorService works like a thread manager.
-
+```
 Tasks submitted
       ↓
 ExecutorService
@@ -1534,6 +1554,7 @@ ExecutorService
 Thread Pool
       ↓
 Tasks executed concurrently
+```
 
 Benefits:
 
