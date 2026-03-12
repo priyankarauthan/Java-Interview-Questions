@@ -653,7 +653,7 @@ When Old Generation fills:
 
 ➡ Major GC (Full GC) occurs.
 
-Types of Garbage Collection
+## Types of Garbage Collection 
 1. Minor GC
 
 Occurs in Young Generation.
@@ -2370,6 +2370,79 @@ Task Chaining: Link multiple tasks to run in sequence or in parallel, where each
 Manual Completion: Explicitly complete a task and provide its result when it's ready.
 
 Exception Handling: Gracefully manage errors that occur during asynchronous operations.
+
+## 3. Important Methods 
+**1️⃣ runAsync()**
+
+Used when no return value
+```
+CompletableFuture.runAsync(() -> {
+    System.out.println("Running task in background");
+});
+```
+✔ Runs async
+❌ Returns nothing
+
+**2️⃣ supplyAsync()** 
+
+Used when a value is returned
+
+CompletableFuture<String> future =
+        CompletableFuture.supplyAsync(() -> "Hello");
+
+✔ Runs async
+✔ Returns result
+
+##  Getting the Result
+**get()**
+String result = future.get();
+
+⚠ Blocks thread until result comes.
+
+join()
+String result = future.join();
+
+Same as get() but no checked exception.
+
+## Processing Result 
+
+You can process result when it arrives.
+```
+CompletableFuture.supplyAsync(() -> "Hello")
+        .thenApply(result -> result + " World")
+        .thenAccept(System.out::println);
+```
+
+Output
+
+Hello World
+
+Flow:
+
+Task → result → modify → print
+## 6. Running Multiple Tasks
+
+Example:
+```
+CompletableFuture<Integer> f1 =
+        CompletableFuture.supplyAsync(() -> 10);
+
+CompletableFuture<Integer> f2 =
+        CompletableFuture.supplyAsync(() -> 20);
+
+CompletableFuture<Integer> result =
+        f1.thenCombine(f2, (a, b) -> a + b);
+
+System.out.println(result.join());
+```
+
+Output
+
+30
+
+Both tasks run parallel.
+
+
 
 Simple Example:-
 
