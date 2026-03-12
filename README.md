@@ -11,6 +11,106 @@
 - [How to Create Immutable Class?](#how-to-create-immutable-class?)
 
 
+## @Transactional in Spring Boot
+
+@Transactional is used to manage database transactions automatically in Spring Boot.
+
+A transaction means a group of database operations that must either all succeed or all fail together.
+
+Example:
+
+Transfer money
+   |
+Withdraw from Account A
+Deposit to Account B
+
+If deposit fails → withdrawal should also be rolled back.
+
+## 1️⃣ What @Transactional Does ?
+
+@Transactional ensures:
+
+All operations succeed → COMMIT
+Any operation fails → ROLLBACK 
+
+## 2️⃣ Example Without Transaction
+```
+public void transfer() {
+
+    withdrawMoney();
+    depositMoney();
+}
+```
+If depositMoney() fails:
+
+Money withdrawn
+Deposit failed
+
+System becomes inconsistent.
+
+## 3️⃣ Example With @Transactional
+```
+@Service
+public class BankService {
+
+    @Transactional
+    public void transferMoney() {
+
+        withdrawMoney();
+        depositMoney();
+    }
+}
+
+```
+If depositMoney() fails:
+
+Withdraw → ROLLBACK
+Deposit → ROLLBACK
+
+Database remains consistent.
+
+## 4️⃣ How Spring Implements @Transactional
+
+Spring uses AOP (Aspect Oriented Programming).
+
+Flow:
+```
+Client
+   ↓
+Proxy
+   ↓
+Transaction Manager
+   ↓
+Database
+```
+
+## Steps:-
+
+Start transaction
+
+Execute method
+
+Commit if success
+
+Rollback if exception occurs 
+
+##  Important @Transactional Properties
+Propagation
+
+Defines how transactions behave when one transaction calls another.
+
+Example:
+
+@Transactional(propagation = Propagation.REQUIRED)
+
+Common types:
+
+Propagation	Meaning
+REQUIRED	- Join existing transaction
+REQUIRES_NEW	-  Create new transaction
+SUPPORTS	- Use transaction if exists
+
+
 ## How to Create Immutable Class?
 
 An immutable class is a class whose objects cannot be changed after they are created.
