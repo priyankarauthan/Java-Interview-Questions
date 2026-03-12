@@ -86,6 +86,93 @@ git push --force-with-lease to update the remote repository.
 
 If the commit is older, I will use interactive rebase (git rebase -i) to modify the commit message.
 
+## Git commands to push code to a remote repository (like GitHub/GitLab).
+
+1️⃣ Initialize Git Repository
+
+Go to your project folder and initialize Git.
+```
+git init
+```
+
+This creates a .git directory and starts version control.
+
+2️⃣ Check Status
+
+See which files are tracked/untracked.
+```
+git status
+```
+3️⃣ Add Files to Staging Area
+
+Add a specific file:
+```
+git add filename.java
+```
+
+Add all files:
+```
+git add .
+```
+4️⃣ Commit the Changes
+```
+git commit -m "Added user service implementation"
+```
+
+This creates a snapshot of your code.
+
+5️⃣ Add Remote Repository
+
+Link your local repo to GitHub/GitLab.
+```
+git remote add origin https://github.com/username/repository.git
+```
+
+Check remote:
+```
+git remote -v
+```
+6️⃣ Push Code to Remote Repository
+
+First push:
+```
+git push -u origin main
+```
+
+or if branch name is master
+```
+git push -u origin master
+```
+
+-u sets upstream so next time you can just run:
+```
+git push
+```
+
+7️⃣ Future Workflow (Daily Work)
+
+**After making code changes:**
+```
+git add .
+git commit -m "Updated payment service"
+git push
+```
+8️⃣ Complete Workflow (Most Common)
+```
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/username/repo.git
+git push -u origin main
+```
+
+## How to push a new branch?
+
+git checkout -b feature-login 
+git add . 
+git commit -m "Added login feature" 
+git push -u origin feature-login 
+ 
 
 
 ## JVM Memory
