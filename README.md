@@ -11,104 +11,60 @@
 - [How to Create Immutable Class?](#how-to-create-immutable-class?)
 
 
-## @Transactional in Spring Boot
 
-@Transactional is used to manage database transactions automatically in Spring Boot.
 
-A transaction means a group of database operations that must either all succeed or all fail together.
+✅ 1. Type-Based Switching (NEW 🔥)
+Object obj = "Hello";
 
-Example:
-
-Transfer money
-   |
-Withdraw from Account A
-Deposit to Account B
-
-If deposit fails → withdrawal should also be rolled back.
-
-## 1️⃣ What @Transactional Does ?
-
-@Transactional ensures:
-
-All operations succeed → COMMIT
-Any operation fails → ROLLBACK 
-
-## 2️⃣ Example Without Transaction
-```
-public void transfer() {
-
-    withdrawMoney();
-    depositMoney();
+switch (obj) {
+    case String s -> System.out.println(s);
+    case Integer i -> System.out.println(i);
 }
-```
-If depositMoney() fails:
+✅ 2. Null Handling (NEW)
+switch (obj) {
+    case null -> System.out.println("Null");
+    case String s -> System.out.println(s);
+}
+✅ 3. Guard Conditions (when) 🔥
+switch (obj) {
+    case String s when s.length() > 5 -> System.out.println("Long");
+    case String s -> System.out.println("Short");
+}
+✅ 4. Record Pattern Matching (Advanced)
+record Point(int x, int y) {}
 
-Money withdrawn
-Deposit failed
+Point p = new Point(1, 2);
 
-System becomes inconsistent.
+switch (p) {
+    case Point(int x, int y) -> System.out.println(x + "," + y);
+}
+✅ 5. Sealed Class Handling (Very Important)
+sealed interface Shape permits Circle, Square {}
 
-## 3️⃣ Example With @Transactional
-```
-@Service
-public class BankService {
-
-    @Transactional
-    public void transferMoney() {
-
-        withdrawMoney();
-        depositMoney();
-    }
+switch (shape) {
+    case Circle c -> System.out.println("Circle");
+    case Square s -> System.out.println("Square");
 }
 
-```
-If depositMoney() fails:
+✔️ Compiler ensures all cases handled
 
-Withdraw → ROLLBACK
-Deposit → ROLLBACK
 
-Database remains consistent.
+switch can now handle:-
 
-## 4️⃣ How Spring Implements @Transactional
+Values (int, String, enum)
+Multiple values
+Return values (expression)
+Types (String, Integer, etc.)
+null
+Conditions (when)
+Records (destructuring)
+Sealed classes (exhaustive)
 
-Spring uses AOP (Aspect Oriented Programming).
+“In my project, we process different types of incoming data, like String payloads, numeric values, and custom objects from Kafka messages or API requests. Earlier, we were using multiple instanceof checks with manual casting, which made the code verbose and hard to maintain.
 
-Flow:
-```
-Client
-   ↓
-Proxy
-   ↓
-Transaction Manager
-   ↓
-Database
-```
+After Java 21, I replaced that logic with switch pattern matching. Now, based on the type of input, we directly handle it in a clean switch block without explicit casting. This improved readability and reduced boilerplate code significantly.”
 
-## Steps:-
 
-Start transaction
-
-Execute method
-
-Commit if success
-
-Rollback if exception occurs 
-
-##  Important @Transactional Properties
-Propagation
-
-Defines how transactions behave when one transaction calls another.
-
-Example:
-
-@Transactional(propagation = Propagation.REQUIRED)
-
-Common types:
-
-Propagation	Meaning
-REQUIRED	- Join existing transaction
-REQUIRES_NEW	-  Create new transaction
-SUPPORTS	- Use transaction if exists
 
 
 ## How to Create Immutable Class?
@@ -2929,6 +2885,10 @@ CompletableFuture is a Java class used to run asynchronous, non-blocking tasks a
 | `final` instance variable       | Heap                                   |
 | `static final` variable         | Method Area                            |
 | `static final` reference object | Heap (object), Method Area (reference) |
+
+
+
+
 
 
 
