@@ -13,7 +13,7 @@
 
 
 
-## ✅ 1. Type-Based Switching (NEW 🔥)
+## ✅ 1. Type-Based Switching 
 ```
 Object obj = "Hello";
 
