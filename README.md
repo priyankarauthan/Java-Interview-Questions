@@ -22,7 +22,7 @@ switch (obj) {
     case Integer i -> System.out.println(i);
 }
 ```
-## ✅ 2. Null Handling (NEW)
+## ✅ 2. Null Handling 
 ```
 switch (obj) {
     case null -> System.out.println("Null");
