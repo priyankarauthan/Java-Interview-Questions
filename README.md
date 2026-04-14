@@ -29,7 +29,7 @@ switch (obj) {
     case String s -> System.out.println(s);
 }
 ```
-## ✅ 3. Guard Conditions (when) 
+## ✅ 3. Guard Conditions (when)    
 ```
 switch (obj) {
     case String s when s.length() > 5 -> System.out.println("Long");
