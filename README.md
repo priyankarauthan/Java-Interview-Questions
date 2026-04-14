@@ -108,6 +108,22 @@ Return copies of mutable objects if necessary (If a class contains mutable objec
 
 
 
+## What is the difference between == and .equals() in Java?
+== is used to compare object references (memory addresses), whereas .equals() is used to compare the logical equality of objects.
+
+By default, .equals() behaves like ==, unless overridden.
+
+In collections like HashMap, hashCode() is used to determine the bucket where the object will be stored, and equals() is used to compare objects within the same bucket.
+
+There is a contract between equals() and hashCode():
+
+If two objects are equal, their hashCodes must be equal
+If hashCodes are equal, objects may or may not be equal
+
+If we don’t override equals(), objects with same data may not be treated as equal, which can lead to unexpected behavior in collections like HashMap.
+
+
+
 ## How do you Dockerize a Spring Boot Application?
 ```
 Step 1 Build Jar 
