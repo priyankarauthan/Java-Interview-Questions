@@ -13,24 +13,31 @@
 
 
 
-✅ 1. Type-Based Switching (NEW 🔥)
+## ✅ 1. Type-Based Switching (NEW 🔥)
+```
 Object obj = "Hello";
 
 switch (obj) {
     case String s -> System.out.println(s);
     case Integer i -> System.out.println(i);
 }
-✅ 2. Null Handling (NEW)
+```
+## ✅ 2. Null Handling (NEW)
+```
 switch (obj) {
     case null -> System.out.println("Null");
     case String s -> System.out.println(s);
 }
-✅ 3. Guard Conditions (when) 🔥
+```
+## ✅ 3. Guard Conditions (when) 
+```
 switch (obj) {
     case String s when s.length() > 5 -> System.out.println("Long");
     case String s -> System.out.println("Short");
 }
-✅ 4. Record Pattern Matching (Advanced)
+```
+## ✅ 4. Record Pattern Matching 
+```
 record Point(int x, int y) {}
 
 Point p = new Point(1, 2);
@@ -38,13 +45,16 @@ Point p = new Point(1, 2);
 switch (p) {
     case Point(int x, int y) -> System.out.println(x + "," + y);
 }
-✅ 5. Sealed Class Handling (Very Important)
+```
+## ✅ 5. Sealed Class Handling 
+```
 sealed interface Shape permits Circle, Square {}
 
 switch (shape) {
     case Circle c -> System.out.println("Circle");
     case Square s -> System.out.println("Square");
 }
+```
 
 ✔️ Compiler ensures all cases handled
 
