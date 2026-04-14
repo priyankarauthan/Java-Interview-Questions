@@ -65,6 +65,19 @@ Sealed classes (exhaustive)
 After Java 21, I replaced that logic with switch pattern matching. Now, based on the type of input, we directly handle it in a clean switch block without explicit casting. This improved readability and reduced boilerplate code significantly.”
 
 
+## What is the difference between : Extending Thread class and Implementing Runnable interface
+🔹 Extending Thread
+You override the run() method
+The task and thread are tightly coupled
+You cannot extend any other class (due to single inheritance)      
+
+🔹 Implementing Runnable
+You implement the run() method
+The task is decoupled from the thread
+You can pass the same Runnable to multiple threads
+Allows better reusability and flexibility
+
+
 
 
 ## How to Create Immutable Class?
